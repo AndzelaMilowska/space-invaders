@@ -21,6 +21,7 @@ const config = {
     devServer: {
         open: true,
         host: 'localhost',
+        port: 5550
     },
     plugins: [
         new MiniCssExtractPlugin({
