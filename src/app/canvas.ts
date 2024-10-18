@@ -1,4 +1,4 @@
-import { Coordinates2D } from "./interfaces/coordinates2DInterface"
+import { Coordinates2D } from "./interfaces/coordinates-2D.interface"
 export class Canvas{
     canvasElement: HTMLCanvasElement
     canvasContext2D: CanvasRenderingContext2D | null

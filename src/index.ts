@@ -1,16 +1,17 @@
 import './main.scss'
 import {Renderer} from './app/renderer'
-import { Config } from './app/appConfig/gameConfig'
-import { Player } from './app/playerActions'
-import { Drawer } from './app/drawers/drawerBase'
-import { GameInitialization } from './app/gameInitialization'
+import { Config } from './app/appConfig/game-config'
+import { Player } from './app/player-actions'
+import { Drawer } from './app/drawers/drawer-base'
+import { GameInitialization } from './app/game-initialization'
 
 
-
-let game = new Renderer('myCanvas', Config, new Player(), new Drawer('myCanvas', Config.canvasConfig), new GameInitialization(Config))
+let gameConfig = new Config()
+let game = new Renderer('myCanvas', gameConfig, new Player(), new Drawer('myCanvas', gameConfig.canvasConfig), new GameInitialization(gameConfig))
 game.renderGame()
 
 
-//then copy ball but only for collision purposes --> convert into bullets (on click and move in y axis)
 //make enemies movement
 //covert ball into bullets
+//one config interface
+//one elementData interface --> then extend it?
