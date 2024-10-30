@@ -1,20 +1,27 @@
 import { Config } from "./appConfig/game-config";
+import { GameplayData } from "./appConfig/game-data";
 import { CharacterConfig } from "./interfaces/character-config.interface";
 import { CharacterData } from "./interfaces/character-data.interface";
 import { Table2D } from "./interfaces/table-2D.interface";
+import { Player } from "./player-actions";
 
 export class GameInitialization {
   config: Config;
+  gameData: GameplayData;
+  player: Player;
 
-  constructor(configObject: Config) {
+  constructor(configObject: Config, gameData: GameplayData, player: Player) {
     this.config = configObject;
+    this.gameData = gameData;
+    this.player = player;
   }
 
   initGameData(): void {
     this.config.enemiesConfig.offsetLeft = this.config.countEnemiesLeftOffset(); //count left offset start point
-    this.config.gameData.enemies = this.generateEnemies(this.config.enemiesConfig, this.config.enemyConfig, ); //create enemies arr
+    this.gameData.enemies = this.generateEnemies(this.config.enemiesConfig, this.config.enemyConfig); //create enemies arr
+    this.player.detectMovement();
+    this.player.playerAttack(this.gameData);
   }
-
 
   generateEnemies(enemiesTableConfig: Table2D, enemyConfig: CharacterConfig): CharacterData[][] {
     let enemiesArray: CharacterData[][] = [];

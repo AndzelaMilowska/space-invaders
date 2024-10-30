@@ -9,7 +9,7 @@ import { ElementConfig } from "../interfaces/element-config.interface";
 import { CharacterConfig } from "../interfaces/character-config.interface";
 import {bulletsConfig_01} from './bullets-config-01'
 export class Config {
-
+  //not sure is it right place for this method --> its the only method affecting config but must be invoked in game init //idk
   countEnemiesLeftOffset(): number {
     return (this.canvasConfig.x - this.enemiesConfig.columnsCount * (this.enemyConfig.size.x + this.enemiesConfig.padding)) / 2;
   }
@@ -24,18 +24,6 @@ export class Config {
 
   bulletsConfig_01: ElementConfig = bulletsConfig_01
 
-  gameData: GameData = {
-    player: {
-      coordinates: {
-        x: (canvasConfig.x - playerConfig.size.x) / 2,
-        y: canvasConfig.y - playerConfig.size.y - 20,
-      },
-      lives: this.playerConfig.lives,
-    },
-    enemies: [],
-    playerShots: [],
-    score: 0,
-    killsCount: 0,
-    enemyShots: [],
-  };
 }
+
+

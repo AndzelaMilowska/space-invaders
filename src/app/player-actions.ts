@@ -2,13 +2,12 @@ import { Config } from "./appConfig/game-config";
 import { throttle } from "./decorators/throttle";
 import { GameData } from "./interfaces/game-data.interface";
 export class Player {
-  
   isRightKeyPressed: boolean;
   isLeftKeyPressed: boolean;
 
   constructor() {
-    this.isRightKeyPressed = false
-    this.isLeftKeyPressed = false
+    this.isRightKeyPressed = false;
+    this.isLeftKeyPressed = false;
   }
 
   detectMovement() {
@@ -36,18 +35,18 @@ export class Player {
     );
   }
 
-  movePlayer(configObject: Config) {
-    let playerData = configObject.gameData.player;
-    let playerConfig = configObject.playerConfig
+  movePlayer(configObject: Config, gameData: GameData) {
+    let playerData = gameData.player;
+    let playerConfig = configObject.playerConfig;
     if (this.isRightKeyPressed) {
       playerData.coordinates.x = Math.min(playerData.coordinates.x + 7, configObject.canvasConfig.x - playerConfig.size.x);
-    } else if (this.isLeftKeyPressed ) {
+    } else if (this.isLeftKeyPressed) {
       playerData.coordinates.x = Math.max(playerData.coordinates.x - 7, 0);
     }
   }
 
   //aaaaaa throttle is on keydown instead of shooting SO IF PLAYER IS MOVING IT ALSO AFFECTS SHOOTING
-  //just put throttle in if? <-- nope adjust throttle for keydown event? 
+  //just put throttle in if? <-- nope adjust throttle for keydown event?
   playerAttack(gameData: GameData) {
     document.addEventListener(
       "keydown",
