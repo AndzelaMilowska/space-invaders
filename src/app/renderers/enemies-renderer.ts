@@ -7,7 +7,8 @@ import { CharacterConfig } from "../interfaces/character-config.interface";
 import { Coordinates2D } from "../interfaces/coordinates-2D.interface";
 import { GameData } from "../interfaces/game-data.interface";
 import { Table2D } from "../interfaces/table-2D.interface";
-import { Player } from "../player-actions";
+import { Player } from "../actions/player/player-actions";
+import {EnemiesActions} from "../actions/enemies/enemies-actions"
 
 export class EnemiesRenderer {
   enemiesDrawer: EnemiesDrawer;
@@ -16,6 +17,7 @@ export class EnemiesRenderer {
   player: Player;
   config: Config;
   gameData: GameplayData;
+  enemiesActions: EnemiesActions
 
   constructor(
     drawer: Drawer,
@@ -23,7 +25,8 @@ export class EnemiesRenderer {
     config: Config,
     gameData: GameplayData,
     enemiesDrawer: EnemiesDrawer,
-    attacksDrawer: AttackDrawer
+    attacksDrawer: AttackDrawer,
+    enemiesActions: EnemiesActions
   ) {
     this.drawer = drawer;
     this.player = player;
@@ -31,9 +34,11 @@ export class EnemiesRenderer {
     this.gameData = gameData;
     this.enemiesDrawer = enemiesDrawer;
     this.attacksDrawer = attacksDrawer;
+    this.enemiesActions = enemiesActions
   }
 
   renderEnemies() {
+    this.enemiesActions.moveEnemiesTable()
     this.enemiesDrawer.drawEnemies(this.config, this.gameData);
     this.detectEnemiesCollision(this.gameData, this.config.enemiesConfig, this.config.enemyConfig);
     this.attacksDrawer.drawShots(this.config.bulletsConfig_01, this.gameData.playerShots);
@@ -52,21 +57,13 @@ export class EnemiesRenderer {
             playerShots[i].y > b.coordinates.y &&
             playerShots[i].y < b.coordinates.y + enemyConfig.size.y
           ) {
-            b.lives = 0;
+            b.lives--;
             //convert to slice! dont mutate arrays
             playerShots.splice(i, 1); //
             gameData.score++;
             gameData.killsCount++;
             return;
           }
-          // put win condition function into separate class --> gameInit convert?  --> game status? win/ loose/ start screen
-          // if (
-          //   enemiesTable.enemiesColumnCount * enemiesTable.enemiesRowCount === gameData.killsCount
-          // ) {
-          //   alert("YOU WIN, CONGRATULATIONS!");
-          //   document.location.reload();
-          //   // clearInterval(this.interval);
-          // }
         }
       }
     }

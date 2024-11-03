@@ -1,6 +1,6 @@
-import { Config } from "./appConfig/game-config";
-import { throttle } from "./decorators/throttle";
-import { GameData } from "./interfaces/game-data.interface";
+import { Config } from "../../appConfig/game-config";
+import { throttle } from "../../decorators/throttle";
+import { GameData } from "../../interfaces/game-data.interface";
 export class Player {
   isRightKeyPressed: boolean;
   isLeftKeyPressed: boolean;

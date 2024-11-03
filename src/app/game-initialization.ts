@@ -3,7 +3,7 @@ import { GameplayData } from "./appConfig/game-data";
 import { CharacterConfig } from "./interfaces/character-config.interface";
 import { CharacterData } from "./interfaces/character-data.interface";
 import { Table2D } from "./interfaces/table-2D.interface";
-import { Player } from "./player-actions";
+import { Player } from "./actions/player/player-actions";
 
 export class GameInitialization {
   config: Config;

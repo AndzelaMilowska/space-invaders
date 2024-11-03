@@ -15,4 +15,11 @@ export class GameplayData extends Config implements GameData {
   score: number = 0;
   killsCount: number = 0;
   enemyShots: Coordinates2D[] = [];
+  enemiesTable = {
+    skippedFrameCounter: 0,
+    coordinates: {
+      x: 0,
+      y: 0
+    }
+  }
 }

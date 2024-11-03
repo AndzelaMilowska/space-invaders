@@ -1,6 +1,6 @@
 import { Config } from "../appConfig/game-config";
 import { Drawer } from "../drawers/base-drawer";
-import { Player } from "../player-actions";
+import { Player } from "../actions/player/player-actions";
 import { GameplayData } from "../appConfig/game-data";
 
 export class PlayerRenderer {

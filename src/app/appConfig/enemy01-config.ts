@@ -7,7 +7,7 @@ export const enemyConfig: CharacterConfig = {
         y: 40,
       },
       frameStep: {
-        x: 0,
+        x: 2,
         y: 0,
       },
       lives: 1,
