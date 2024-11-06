@@ -8,6 +8,9 @@ import { ElementConfig } from "../interfaces/element-config.interface";
 import { CharacterConfig } from "../interfaces/character-config.interface";
 import {bulletsConfig_01} from './bullets-config-01'
 import { EnemiesTable2D } from "../interfaces/enemies-table-2D.interface";
+import {UIConfigInterface} from "../interfaces/ui-config.interface"
+import {uiConfig} from "./ui-config"
+
 export class Config {
   countEnemiesLeftOffset(): number {
     return (this.canvasConfig.x - this.enemiesConfig.columnsCount * (this.enemyConfig.size.x + this.enemiesConfig.padding)) / 2;
@@ -22,6 +25,8 @@ export class Config {
   playerConfig: CharacterConfig = playerConfig;
 
   bulletsConfig_01: ElementConfig = bulletsConfig_01
+
+  uiConfig: UIConfigInterface = uiConfig
 
 }
 

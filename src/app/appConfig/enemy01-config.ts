@@ -12,4 +12,5 @@ export const enemyConfig: CharacterConfig = {
       },
       lives: 1,
       imgs: constants.ENEMY_01_IMGS,
+      scorePrice: 10
   }

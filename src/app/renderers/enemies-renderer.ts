@@ -60,7 +60,7 @@ export class EnemiesRenderer {
             b.lives--;
             //convert to slice! dont mutate arrays
             playerShots.splice(i, 1); //
-            gameData.score++;
+            gameData.score = gameData.score+enemyConfig.scorePrice;
             gameData.killsCount++;
             return;
           }

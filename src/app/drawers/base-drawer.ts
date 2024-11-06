@@ -26,4 +26,11 @@ export class Drawer extends Canvas {
     this.canvasContext.fill();
     this.canvasContext.closePath();
   }
+
+  drawText (textData: string, coordinates: Coordinates2D, fontConfig: string, fontStyle: string) {
+    this.canvasContext.font = fontConfig;
+    this.canvasContext.fillStyle = fontStyle;
+    this.canvasContext.fillText(textData, coordinates.x, coordinates.y);
+  }
+
 }

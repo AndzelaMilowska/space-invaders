@@ -5,6 +5,7 @@ import { GameplayData } from "../appConfig/game-data";
 import { PlayerRenderer } from "./player-renderer";
 import {EnemiesRenderer} from "./enemies-renderer"
 import {GameplayActions} from "../actions/gameplayActions"
+import {UIRenderer} from "./ui-renderer"
 
 export class Renderer extends Canvas {
   interval: NodeJS.Timeout;
@@ -13,32 +14,42 @@ export class Renderer extends Canvas {
   gameData: GameplayData;
   gameplayActions: GameplayActions;
   playerRenderer: PlayerRenderer;
-  enemiesRenderer: EnemiesRenderer
+  enemiesRenderer: EnemiesRenderer;
+  uiRenderer: UIRenderer;
 
   constructor(
     canvasId: string,
     configObject: Config,
+    //gameData: GameplayData,
     playerRenderer: PlayerRenderer,
     gameInit: GameInitialization,
     enemiesRenderer: EnemiesRenderer,
-    gameplayActions: GameplayActions
+    gameplayActions: GameplayActions,
+    uiRenderer: UIRenderer,
   ) {
     super(canvasId, configObject.canvasConfig);
     this.config = configObject;
+    //this.gameData = gameData;
     this.gameInit = gameInit;
     this.playerRenderer = playerRenderer;
     this.enemiesRenderer = enemiesRenderer
     this.gameplayActions = gameplayActions
+    this.uiRenderer = uiRenderer
   }
 
   renderGame() {
     this.gameInit.initGameData();
 
     this.interval = setInterval(() => {
+
       this.canvasContext.clearRect(0, 0, this.config.canvasConfig.x, this.config.canvasConfig.y);
       this.playerRenderer.renderPlayer()
       this.enemiesRenderer.renderEnemies()
+      this.uiRenderer.renderUI()
+      
       this.gameplayActions.isWin(this.interval)
+
+
     }, 10);
   } 
 }

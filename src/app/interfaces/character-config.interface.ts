@@ -1,5 +1,6 @@
 import { ElementConfig } from "./element-config.interface";
 
 export interface CharacterConfig extends ElementConfig{
-    lives: number
+    lives: number,
+    scorePrice?: number
 }

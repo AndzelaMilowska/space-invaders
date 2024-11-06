@@ -10,6 +10,7 @@ export class GameplayActions {
     this.gameData = gameData;
   }
 
+  //make cooler win screen -> after win new screen "you win" --> go to start
   isWin(interval: NodeJS.Timeout) {
     if (this.gameConfig.enemiesConfig.rowsCount * this.gameConfig.enemiesConfig.columnsCount === this.gameData.killsCount) {
       alert("YOU WIN, CONGRATULATIONS!");
