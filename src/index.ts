@@ -40,10 +40,9 @@ game.renderGame();
 /* 
     TODO list:
 
-    - enemies fire
-    - enemies bullets x player collision
-    - lose condition
-    -better score count
+    - freeze player position after death
+    - random enemy attack time
+    
 
     - start screen
     - back to start screen after loosse

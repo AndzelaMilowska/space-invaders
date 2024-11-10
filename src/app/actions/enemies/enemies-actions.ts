@@ -61,7 +61,7 @@ export class EnemiesActions {
     return enemies[i][j];
   }
 
-  enemiesAttack() {
+  enemiesAttackBACKUP() {
     const { enemies, enemyShots } = this.gameData;
     const { enemyConfig } = this.gameConfig;
 
@@ -78,5 +78,30 @@ export class EnemiesActions {
       };
       enemyShots.push(bulletCoordinates);
     }, 700);
+  }
+
+  enemiesAttack() {
+    
+    const { enemies, enemyShots } = this.gameData;
+    const { enemyConfig } = this.gameConfig;
+
+    const minTime = 1
+    const maxTime = 6
+
+    const randomTime = Math.floor(Math.random() * (maxTime - minTime + 1) + minTime) * 1000
+
+    let columnIndex = Math.floor(Math.random() * enemies.length);
+    let rowIndex = Math.floor(Math.random() * enemies[columnIndex].length);
+    do {
+      columnIndex = Math.floor(Math.random() * enemies.length);
+      rowIndex = Math.floor(Math.random() * enemies[columnIndex].length);
+    } while (enemies[columnIndex][rowIndex].lives < 1);
+    const bulletCoordinates = {
+      x: enemies[columnIndex][rowIndex].coordinates.x + enemyConfig.size.x / 2,
+      y: enemies[columnIndex][rowIndex].coordinates.y + enemyConfig.size.y,
+    };
+    enemyShots.push(bulletCoordinates);
+
+    setTimeout(this.enemiesAttack.bind(this), randomTime)
   }
 }
