@@ -60,4 +60,21 @@ export class Player {
       }, 200)
     );
   }
+
+  detectPlayerCollision(gameData: GameData, configObject: Config) {
+    const { enemyShots, player } = gameData;
+    const {playerConfig} = configObject
+
+    for (let i = 0; i < enemyShots.length; i++) {
+      const playerLeft = player.coordinates.x - playerConfig.size.x/2 +20
+      const playerRight = playerLeft + playerConfig.size.x -10
+      const playerTop = player.coordinates.y - playerConfig.size.y/2
+      const playerBot = playerTop + playerConfig.size.y
+      if (enemyShots[i].x >= playerLeft && enemyShots[i].x <= playerRight && enemyShots[i].y >= playerTop && enemyShots[i].y <= playerBot) {
+        
+        enemyShots.splice(i, 1)
+        player.lives = player.lives-1
+      }
+    }
+  }
 }

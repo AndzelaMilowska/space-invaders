@@ -16,6 +16,10 @@ export class GameplayActions {
       alert("YOU WIN, CONGRATULATIONS!");
       document.location.reload();
       clearInterval(interval);
+    } else if(this.gameData.player.lives < 1) {
+      alert("YOU DIED");
+      document.location.reload();
+      clearInterval(interval);
     }
   }
 

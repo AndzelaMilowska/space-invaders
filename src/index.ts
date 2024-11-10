@@ -16,19 +16,22 @@ import { UIDrawer } from "./app/drawers/ui-drawer";
 
 const gameConfig = new Config();
 const gameData = new GameplayData();
-const player = new Player();
-const gameInit = new GameInitialization(gameConfig, gameData, player);
 
+const playerActions = new Player();
 const enemiesActions = new EnemiesActions(gameData, gameConfig)
 const gameplayActions = new GameplayActions(gameConfig, gameData)
+
+const gameInit = new GameInitialization(gameConfig, gameData, playerActions, enemiesActions);
+
+
 
 const drawer = new Drawer("myCanvas", gameConfig.canvasConfig);
 const enemiesDrawer = new EnemiesDrawer("myCanvas", gameConfig.canvasConfig);
 const attacksDrawer = new AttackDrawer("myCanvas", gameConfig.canvasConfig);
 const uiDrawer = new UIDrawer("myCanvas", gameConfig.canvasConfig)
 
-const playerRenderer = new PlayerRenderer(drawer, player, gameConfig, gameData);
-const enemiesRenderer = new EnemiesRenderer(drawer, player, gameConfig, gameData, enemiesDrawer, attacksDrawer, enemiesActions);
+const playerRenderer = new PlayerRenderer(drawer, playerActions, gameConfig, gameData, attacksDrawer);
+const enemiesRenderer = new EnemiesRenderer(drawer, playerActions, gameConfig, gameData, enemiesDrawer, attacksDrawer, enemiesActions);
 const uiRenderer = new UIRenderer(uiDrawer, gameData, gameConfig.uiConfig)
 const game = new Renderer("myCanvas", gameConfig, playerRenderer, gameInit, enemiesRenderer, gameplayActions, uiRenderer);
 

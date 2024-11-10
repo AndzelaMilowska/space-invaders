@@ -41,7 +41,7 @@ export class EnemiesRenderer {
     this.enemiesActions.moveEnemiesTable()
     this.enemiesDrawer.drawEnemies(this.config, this.gameData);
     this.detectEnemiesCollision(this.gameData, this.config.enemiesConfig, this.config.enemyConfig);
-    this.attacksDrawer.drawShots(this.config.bulletsConfig_01, this.gameData.playerShots);
+    this.attacksDrawer.drawShots(this.config.bulletsConfig_02, this.gameData.enemyShots);
   }
 
   detectEnemiesCollision(gameData: GameData, enemiesConfig: Table2D, enemyConfig: CharacterConfig): void {

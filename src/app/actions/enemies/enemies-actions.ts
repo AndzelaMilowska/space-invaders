@@ -41,7 +41,7 @@ export class EnemiesActions {
       } else {
         j++;
       }
-    } while (enemies[i][j].lives <= 0);
+    } while (enemies[i][j] && enemies[i][j].lives <= 0);
     return enemies[i][j];
   }
 
@@ -57,9 +57,26 @@ export class EnemiesActions {
       } else {
         j--;
       }
-    } while (enemies[i][j].lives <= 0);
+    } while (enemies[i][j] && enemies[i][j].lives <= 0);
     return enemies[i][j];
   }
 
-  enemiesAttack() {}
+  enemiesAttack() {
+    const { enemies, enemyShots } = this.gameData;
+    const { enemyConfig } = this.gameConfig;
+
+    setInterval(() => {
+      let columnIndex = Math.floor(Math.random() * enemies.length);
+      let rowIndex = Math.floor(Math.random() * enemies[columnIndex].length);
+      do {
+        columnIndex = Math.floor(Math.random() * enemies.length);
+        rowIndex = Math.floor(Math.random() * enemies[columnIndex].length);
+      } while (enemies[columnIndex][rowIndex].lives < 1);
+      const bulletCoordinates = {
+        x: enemies[columnIndex][rowIndex].coordinates.x + enemyConfig.size.x / 2,
+        y: enemies[columnIndex][rowIndex].coordinates.y + enemyConfig.size.y,
+      };
+      enemyShots.push(bulletCoordinates);
+    }, 700);
+  }
 }
