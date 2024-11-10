@@ -8,7 +8,7 @@ import { Coordinates2D } from "../interfaces/coordinates-2D.interface";
 import { GameData } from "../interfaces/game-data.interface";
 import { Table2D } from "../interfaces/table-2D.interface";
 import { Player } from "../actions/player/player-actions";
-import {EnemiesActions} from "../actions/enemies/enemies-actions"
+import { EnemiesActions } from "../actions/enemies/enemies-actions";
 
 export class EnemiesRenderer {
   enemiesDrawer: EnemiesDrawer;
@@ -17,7 +17,7 @@ export class EnemiesRenderer {
   player: Player;
   config: Config;
   gameData: GameplayData;
-  enemiesActions: EnemiesActions
+  enemiesActions: EnemiesActions;
 
   constructor(
     drawer: Drawer,
@@ -34,11 +34,11 @@ export class EnemiesRenderer {
     this.gameData = gameData;
     this.enemiesDrawer = enemiesDrawer;
     this.attacksDrawer = attacksDrawer;
-    this.enemiesActions = enemiesActions
+    this.enemiesActions = enemiesActions;
   }
 
   renderEnemies() {
-    this.enemiesActions.moveEnemiesTable()
+    this.enemiesActions.moveEnemiesTable();
     this.enemiesDrawer.drawEnemies(this.config, this.gameData);
     this.detectEnemiesCollision(this.gameData, this.config.enemiesConfig, this.config.enemyConfig);
     this.attacksDrawer.drawShots(this.config.bulletsConfig_02, this.gameData.enemyShots);
@@ -49,18 +49,22 @@ export class EnemiesRenderer {
     for (let i = 0; i < playerShots.length; i++) {
       for (let c = 0; c < enemiesConfig.columnsCount; c++) {
         for (let r = 0; r < enemiesConfig.rowsCount; r++) {
-          const b = gameData.enemies[c][r];
+          const enemy = gameData.enemies[c][r];
+          const enemyLeftLedge = enemy.coordinates.x;
+          const enemyRightLedge = enemyLeftLedge + enemyConfig.size.x;
+          const enemyTopLedge = enemy.coordinates.y;
+          const enemyBotLedge = enemyTopLedge + enemyConfig.size.y;
           if (
-            b.lives === 1 &&
-            playerShots[i].x > b.coordinates.x &&
-            playerShots[i].x < b.coordinates.x + enemyConfig.size.x &&
-            playerShots[i].y > b.coordinates.y &&
-            playerShots[i].y < b.coordinates.y + enemyConfig.size.y
+            enemy.lives === 1 &&
+            playerShots[i].x >= enemyLeftLedge &&
+            playerShots[i].x <= enemyRightLedge &&
+            playerShots[i].y >= enemyTopLedge &&
+            playerShots[i].y <= enemyBotLedge
           ) {
-            b.lives--;
+            enemy.lives--;
             //convert to slice! dont mutate arrays
             playerShots.splice(i, 1); //
-            gameData.score = gameData.score+enemyConfig.scorePrice;
+            gameData.score = gameData.score + enemyConfig.scorePrice;
             gameData.killsCount++;
             return;
           }

@@ -24,7 +24,6 @@ export class GameInitialization {
     this.gameData.enemies = this.generateEnemies(this.config.enemiesConfig, this.config.enemyConfig); //create enemies arr
     this.player.detectMovement();
     this.player.playerAttack(this.gameData);
-    console.log(this.gameData)
     this.enemiesActions.enemiesAttack()
    
   }

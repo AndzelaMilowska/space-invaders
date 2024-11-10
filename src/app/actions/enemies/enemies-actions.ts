@@ -70,8 +70,6 @@ export class EnemiesActions {
     const maxTime = 6
     const randomTime = Math.floor(Math.random() * (maxTime - minTime + 1) + minTime) * 1000
 
-
-
     setTimeout(() => {
 
       let columnIndex = Math.floor(Math.random() * enemies.length);
