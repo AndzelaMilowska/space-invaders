@@ -42,6 +42,7 @@ export class EnemiesActions {
         j++;
       }
     } while (enemies[i][j] && enemies[i][j].lives <= 0);
+    
     return enemies[i][j];
   }
 
@@ -66,12 +67,11 @@ export class EnemiesActions {
     const { enemies, enemyShots } = this.gameData;
     const { enemyConfig } = this.gameConfig;
 
-    const minTime = 1
-    const maxTime = 6
+    const minTime = 0.2
+    const maxTime = 3
     const randomTime = Math.floor(Math.random() * (maxTime - minTime + 1) + minTime) * 1000
 
     setTimeout(() => {
-
       let columnIndex = Math.floor(Math.random() * enemies.length);
       let rowIndex = Math.floor(Math.random() * enemies[columnIndex].length);
       do {
@@ -83,6 +83,7 @@ export class EnemiesActions {
         y: enemies[columnIndex][rowIndex].coordinates.y + enemyConfig.size.y,
       };
       enemyShots.push(bulletCoordinates);
+      this.enemiesAttack()
     }, randomTime)
   }
 }
