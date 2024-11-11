@@ -33,20 +33,26 @@ const uiDrawer = new UIDrawer("myCanvas", gameConfig.canvasConfig)
 const playerRenderer = new PlayerRenderer(drawer, playerActions, gameConfig, gameData, attacksDrawer);
 const enemiesRenderer = new EnemiesRenderer(drawer, playerActions, gameConfig, gameData, enemiesDrawer, attacksDrawer, enemiesActions);
 const uiRenderer = new UIRenderer(uiDrawer, gameData, gameConfig.uiConfig)
-const game = new Renderer("myCanvas", gameConfig, playerRenderer, gameInit, enemiesRenderer, gameplayActions, uiRenderer);
+const game = new Renderer("myCanvas", gameConfig, gameData, playerRenderer, gameInit, enemiesRenderer, gameplayActions, uiRenderer);
 
-game.renderGame();
+game.renderApplication();
 
 /* 
     TODO list:
 
     - freeze player position after death
-    - random enemy attack time
-    
+
+    - table movement rip
+    - enemies stop y movement at weird point
+    - loose if enemies reach the bottom of the canvas
+
+
+    - win/ loose display - game over / you win & score -> return to menu button
 
     - start screen
-    - back to start screen after loosse
+    - back to start screen after loose
 
 
     * animations
+    -unit tests
 */

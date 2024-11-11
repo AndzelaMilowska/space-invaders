@@ -1,4 +1,4 @@
-import { constants } from "../constants";
+import { constants } from "../constants/constants";
 import { CharacterConfig } from "../interfaces/character-config.interface";
 
 export const playerConfig: CharacterConfig = {

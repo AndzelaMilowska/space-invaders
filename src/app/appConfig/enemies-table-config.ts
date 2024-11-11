@@ -6,6 +6,10 @@ export const enemiesConfig: EnemiesTable2D = {
     padding: 10,
     offsetTop: 50,
     offsetLeft: 200,
+    // frameStep: {
+    //   x: 50,
+    //   y: enemyConfig.size.y / 2,
+    // },
     frameStep: {
       x: enemyConfig.size.x / 4,
       y: enemyConfig.size.y / 2,

@@ -2,7 +2,9 @@ import { Config } from "./game-config";
 import { GameData } from "../interfaces/game-data.interface";
 import { CharacterData } from "../interfaces/character-data.interface";
 import { Coordinates2D } from "../interfaces/coordinates-2D.interface";
+import {ApplicationStatus} from '../constants/application-status.enum'
 export class GameplayData extends Config implements GameData {
+  gameStatus = ApplicationStatus.StartScreen;
   player: CharacterData = {
     coordinates: {
       x: (this.canvasConfig.x - this.playerConfig.size.x) / 2,

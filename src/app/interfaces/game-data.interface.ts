@@ -2,6 +2,7 @@ import { CharacterData } from "./character-data.interface";
 import { Coordinates2D } from "./coordinates-2D.interface";
 
 export interface GameData {
+  gameStatus: string;
   player: CharacterData;
   enemies: CharacterData[][];
   playerShots: Coordinates2D[];
