@@ -39,11 +39,9 @@ game.renderApplication();
 
 /* 
     TODO list:
-
+    - unit tests !!!!!
+    
     - freeze player position after death
-
-    - table movement rip
-    - enemies stop y movement at weird point
     - loose if enemies reach the bottom of the canvas
 
 
@@ -54,5 +52,5 @@ game.renderApplication();
 
 
     * animations
-    -unit tests
+
 */

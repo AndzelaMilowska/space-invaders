@@ -8,7 +8,7 @@ export class EnemiesActions {
     this.gameConfig = gameConfig;
   }
   moveEnemiesTable() {
-    const { enemiesTable, enemies } = this.gameData;
+    const { enemiesTable } = this.gameData;
     const { enemiesConfig, canvasConfig, enemyConfig } = this.gameConfig;
 
     if (enemiesTable.skippedFrameCounter === enemiesConfig.frameSkip) {
@@ -18,7 +18,7 @@ export class EnemiesActions {
       ) {
         enemiesTable.coordinates.y = enemiesTable.coordinates.y - enemiesConfig.frameStep.y;
         enemiesConfig.frameStep.x = enemiesConfig.frameStep.x * -1;
-        enemiesConfig.frameSkip = enemiesConfig.frameSkip - enemiesConfig.speedProgression;
+        enemiesConfig.frameSkip = enemiesConfig.frameSkip <= 10 ? enemiesConfig.frameSkip : enemiesConfig.frameSkip - enemiesConfig.speedProgression;
         enemiesTable.skippedFrameCounter = 0;
       } else {
         enemiesTable.coordinates.x = enemiesTable.coordinates.x + enemiesConfig.frameStep.x;
@@ -41,8 +41,8 @@ export class EnemiesActions {
       } else {
         j++;
       }
-    } while (enemies[i][j] && enemies[i][j].lives <= 0);
-    
+    } while (enemies[i][j].lives < 1);
+    // console.log(`first left enemy is: ${i} ${j}`)
     return enemies[i][j];
   }
 
@@ -59,6 +59,7 @@ export class EnemiesActions {
         j--;
       }
     } while (enemies[i][j] && enemies[i][j].lives <= 0);
+    // console.log(`first right enemy is: ${i} ${j}`)
     return enemies[i][j];
   }
 
