@@ -3,8 +3,8 @@ import { CharacterConfig } from "../interfaces/character-config.interface";
 
 export const enemyConfig: CharacterConfig = {
     size: {
-        x: 40,
-        y: 40,
+        x: 16*3,
+        y: 8*3,
       },
       frameStep: {
         x: 2,
@@ -12,5 +12,6 @@ export const enemyConfig: CharacterConfig = {
       },
       lives: 1,
       imgs: constants.ENEMY_01_IMGS,
+      currentImg: '',
       scorePrice: 10
   }

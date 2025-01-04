@@ -1,3 +1,4 @@
+import { constants } from "../constants/constants";
 import { canvasConfig } from "./canvas-config-data";
 export const uiConfig = {
   scoreConfig: {
@@ -15,10 +16,10 @@ export const uiConfig = {
     },
     fontConfig: "20px pixel",
     fontStyle: "#0095DD",
-    icon: "https://png.pngtree.com/png-clipart/20230511/ourmid/pngtree-isolated-cat-on-white-background-png-image_7094927.png",
+    icon: constants.PLAYER_IMGS[0],
     iconSize: {
-        x: 30,
-        y: 30
+        x: 16*2,
+        y: 8*2
     }
   },
 };

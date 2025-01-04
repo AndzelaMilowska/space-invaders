@@ -8,5 +8,6 @@ export const bulletsConfig_01: ElementConfig = {
       x: 5,
       y: 15,
     },
-    imgs: []
+    imgs: [],
+    currentImg: ''
   }

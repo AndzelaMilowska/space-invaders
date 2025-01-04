@@ -4,4 +4,5 @@ export interface ElementConfig {
   frameStep: Coordinates2D;
   size: Coordinates2D;
   imgs: string[];
+  currentImg: string
 }

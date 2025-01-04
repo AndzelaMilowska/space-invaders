@@ -12,6 +12,8 @@ export class EnemiesActions {
     const { enemiesConfig, canvasConfig, enemyConfig } = this.gameConfig;
 
     if (enemiesTable.skippedFrameCounter === enemiesConfig.frameSkip) {
+      const imgSource = enemyConfig.currentImg === enemyConfig.imgs[0] ? enemyConfig.imgs[1] : enemyConfig.imgs[0]
+      enemyConfig.currentImg = imgSource
       if (
         this.findEnemiesTableRightEdge().coordinates.x + enemiesConfig.frameStep.x + enemyConfig.size.x >= canvasConfig.x ||
         this.findEnemiesTableLeftEdge().coordinates.x + enemiesConfig.frameStep.x <= 0
@@ -42,7 +44,6 @@ export class EnemiesActions {
         j++;
       }
     } while (enemies[i][j].lives < 1);
-    // console.log(`first left enemy is: ${i} ${j}`)
     return enemies[i][j];
   }
 

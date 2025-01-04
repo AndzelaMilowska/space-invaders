@@ -7,8 +7,10 @@ import { CharacterConfig } from "../interfaces/character-config.interface";
 export class Drawer extends Canvas {
   drawElement(characterData: CharacterData, elementConfig: CharacterConfig) {
     let baseImage = new Image();
-    baseImage.src = elementConfig.imgs[0];
-    // baseImage.onload = () => canvasContext.drawImage()  //idk works fine without this line xD
+    baseImage.src = elementConfig.currentImg
+
+    this.canvasContext.imageSmoothingEnabled = false;
+
     this.canvasContext.drawImage(
       baseImage,
       characterData.coordinates.x,

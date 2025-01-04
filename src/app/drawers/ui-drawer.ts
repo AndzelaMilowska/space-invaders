@@ -12,8 +12,8 @@ export class UIDrawer extends Drawer {
         baseImage.src = livesStyleConfig.icon;
         this.canvasContext.drawImage(
             baseImage,
-            livesStyleConfig.coordinates.x + i * livesStyleConfig.iconSize.x + 80,
-            livesStyleConfig.coordinates.y - (livesStyleConfig.iconSize.y ) + 5,
+            livesStyleConfig.coordinates.x + i * livesStyleConfig.iconSize.x + 70,
+            livesStyleConfig.coordinates.y - (livesStyleConfig.iconSize.y ) -1,
             livesStyleConfig.iconSize.x,
             livesStyleConfig.iconSize.y
         )
