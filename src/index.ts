@@ -11,11 +11,13 @@ import { EnemiesDrawer } from "./app/drawers/enemies-drawer";
 import { AttackDrawer } from "./app/drawers/attack-drawer";
 import { EnemiesActions } from "./app/actions/enemies/enemies-actions";
 import { GameplayActions } from "./app/actions/gameplayActions";
+import { CollisionDetector } from "./app/actions/collision-detector";
 import { UIRenderer } from "./app/renderers/ui-renderer";
 import { UIDrawer } from "./app/drawers/ui-drawer";
 
 const gameConfig = new Config();
 const gameData = new GameplayData();
+const collisionDetector = new CollisionDetector()
 
 const playerActions = new Player();
 const enemiesActions = new EnemiesActions(gameData, gameConfig)
@@ -30,8 +32,8 @@ const enemiesDrawer = new EnemiesDrawer("myCanvas", gameConfig.canvasConfig);
 const attacksDrawer = new AttackDrawer("myCanvas", gameConfig.canvasConfig);
 const uiDrawer = new UIDrawer("myCanvas", gameConfig.canvasConfig)
 
-const playerRenderer = new PlayerRenderer(drawer, playerActions, gameConfig, gameData, attacksDrawer);
-const enemiesRenderer = new EnemiesRenderer(drawer, playerActions, gameConfig, gameData, enemiesDrawer, attacksDrawer, enemiesActions);
+const playerRenderer = new PlayerRenderer(drawer, playerActions, gameConfig, gameData, attacksDrawer, collisionDetector);
+const enemiesRenderer = new EnemiesRenderer(drawer, playerActions, gameConfig, gameData, enemiesDrawer, attacksDrawer, enemiesActions, collisionDetector);
 const uiRenderer = new UIRenderer(uiDrawer, gameData, gameConfig.uiConfig)
 const game = new Renderer("myCanvas", gameConfig, gameData, playerRenderer, gameInit, enemiesRenderer, gameplayActions, uiRenderer);
 
@@ -53,4 +55,18 @@ game.renderApplication();
 
     * animations
 
+
+
+    refractor moveEnemiesTable()  - more descriptive and flexible --> enemies types and amount in config
+   change animation to loop - changeDisplayedImg
+   add death animations
+
+   detectPlaterCollision
+   collision calculations should be ideally generic, 
+    the same logic shoulc should apply whether you collide with enemy or player. 
+    Refactor to account this.
+
+    Why attack and element has separete drawers? 
+    It should not be a concern to drawer what type of entity is being drawn.
+    Read about polymorphism more.
 */

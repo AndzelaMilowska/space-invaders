@@ -7,7 +7,7 @@ import { CharacterConfig } from "../interfaces/character-config.interface";
 export class Drawer extends Canvas {
   drawElement(characterData: CharacterData, elementConfig: CharacterConfig) {
     let baseImage = new Image();
-    baseImage.src = elementConfig.currentImg
+    baseImage.src = elementConfig.currentBaseAnimationFrame
 
     this.canvasContext.imageSmoothingEnabled = false;
 

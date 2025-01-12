@@ -45,8 +45,6 @@ export class Player {
     }
   }
 
-  //aaaaaa throttle is on keydown instead of shooting SO IF PLAYER IS MOVING IT ALSO AFFECTS SHOOTING
-  //just put throttle in if? <-- nope adjust throttle for keydown event?
   playerAttack(gameData: GameData) {
     document.addEventListener(
       "keydown",
@@ -57,24 +55,8 @@ export class Player {
             y: gameData.player.coordinates.y,
           });
         }
-      }, 200)
+      }, 300)
     );
   }
 
-  detectPlayerCollision(gameData: GameData, configObject: Config) {
-    const { enemyShots, player } = gameData;
-    const {playerConfig} = configObject
-
-    for (let i = 0; i < enemyShots.length; i++) {
-      const playerLeft = player.coordinates.x - playerConfig.size.x/2 +20
-      const playerRight = playerLeft + playerConfig.size.x -10
-      const playerTop = player.coordinates.y - playerConfig.size.y/2
-      const playerBot = playerTop + playerConfig.size.y
-      if (enemyShots[i].x >= playerLeft && enemyShots[i].x <= playerRight && enemyShots[i].y >= playerTop && enemyShots[i].y <= playerBot) {
-        
-        enemyShots.splice(i, 1)
-        player.lives = player.lives-1
-      }
-    }
-  }
 }

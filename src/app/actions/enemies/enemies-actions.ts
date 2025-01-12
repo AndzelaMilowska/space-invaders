@@ -1,19 +1,22 @@
 import { Config } from "../../appConfig/game-config";
 import { GameplayData } from "../../appConfig/game-data";
+import { CharacterConfig } from "../../interfaces/character-config.interface";
 export class EnemiesActions {
   gameData: GameplayData;
   gameConfig: Config;
+
   constructor(gameData: GameplayData, gameConfig: Config) {
     this.gameData = gameData;
     this.gameConfig = gameConfig;
   }
+//refractor - more descriptive and flexible
+//Dont like the implem. each for should be a separate entity represented with class that has methods handling movement.
   moveEnemiesTable() {
     const { enemiesTable } = this.gameData;
     const { enemiesConfig, canvasConfig, enemyConfig } = this.gameConfig;
 
     if (enemiesTable.skippedFrameCounter === enemiesConfig.frameSkip) {
-      const imgSource = enemyConfig.currentImg === enemyConfig.imgs[0] ? enemyConfig.imgs[1] : enemyConfig.imgs[0]
-      enemyConfig.currentImg = imgSource
+      this.changeDisplayedImg(enemyConfig)
       if (
         this.findEnemiesTableRightEdge().coordinates.x + enemiesConfig.frameStep.x + enemyConfig.size.x >= canvasConfig.x ||
         this.findEnemiesTableLeftEdge().coordinates.x + enemiesConfig.frameStep.x <= 0
@@ -31,9 +34,19 @@ export class EnemiesActions {
     }
   }
 
+  //change animation to loop 
+  //dont use magic numbers like 0, 1, use variable that describes why it is 0 or 1, or add comment
+  //it shouldn't be in enemies actions
+  changeDisplayedImg(enemyConfig: CharacterConfig) {
+    //take element and animation array
+    //move into next animation frame (array element) or get back to first
+    //set new animation frame to element
+    const imgSource = enemyConfig.currentBaseAnimationFrame === enemyConfig.baseAnimationFrames[0] ? enemyConfig.baseAnimationFrames[1] : enemyConfig.baseAnimationFrames[0]
+    enemyConfig.currentBaseAnimationFrame = imgSource
+  }
+
   findEnemiesTableLeftEdge() {
     const { enemies } = this.gameData;
-
     let i = 0;
     let j = 0;
     do {
@@ -60,12 +73,11 @@ export class EnemiesActions {
         j--;
       }
     } while (enemies[i][j] && enemies[i][j].lives <= 0);
-    // console.log(`first right enemy is: ${i} ${j}`)
     return enemies[i][j];
   }
-
+  //
+//What if we introduce different enemy types, which for example fire are faster rate. The behavior of the entity should be descrivbed by it's class not by the class that handles it.
   enemiesAttack() {
-    
     const { enemies, enemyShots } = this.gameData;
     const { enemyConfig } = this.gameConfig;
 
@@ -74,15 +86,15 @@ export class EnemiesActions {
     const randomTime = Math.floor(Math.random() * (maxTime - minTime + 1) + minTime) * 1000
 
     setTimeout(() => {
-      let columnIndex = Math.floor(Math.random() * enemies.length);
-      let rowIndex = Math.floor(Math.random() * enemies[columnIndex].length);
+      let randomColumnIndex = Math.floor(Math.random() * enemies.length);
+      let randomRowIndex = Math.floor(Math.random() * enemies[randomColumnIndex].length);
       do {
-        columnIndex = Math.floor(Math.random() * enemies.length);
-        rowIndex = Math.floor(Math.random() * enemies[columnIndex].length);
-      } while (enemies[columnIndex][rowIndex].lives < 1);
+        randomColumnIndex = Math.floor(Math.random() * enemies.length);
+        randomRowIndex = Math.floor(Math.random() * enemies[randomColumnIndex].length);
+      } while (enemies[randomColumnIndex][randomRowIndex].lives < 1);
       const bulletCoordinates = {
-        x: enemies[columnIndex][rowIndex].coordinates.x + enemyConfig.size.x / 2,
-        y: enemies[columnIndex][rowIndex].coordinates.y + enemyConfig.size.y,
+        x: enemies[randomColumnIndex][randomRowIndex].coordinates.x + enemyConfig.size.x / 2,
+        y: enemies[randomColumnIndex][randomRowIndex].coordinates.y + enemyConfig.size.y + 3,
       };
       enemyShots.push(bulletCoordinates);
       this.enemiesAttack()

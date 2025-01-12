@@ -8,6 +8,6 @@ export const bulletsConfig_02: ElementConfig = {
       x: 5,
       y: 15,
     },
-    imgs: [],
-    currentImg: ''
+    baseAnimationFrames: [],
+    currentBaseAnimationFrame: ''
   }

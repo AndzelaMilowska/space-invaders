@@ -11,7 +11,7 @@ export const enemyConfig: CharacterConfig = {
         y: 0,
       },
       lives: 1,
-      imgs: constants.ENEMY_01_IMGS,
-      currentImg: '',
+      baseAnimationFrames: constants.ENEMY_01_IMGS,
+      currentBaseAnimationFrame: '',
       scorePrice: 10
   }

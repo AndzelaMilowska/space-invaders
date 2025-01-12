@@ -7,7 +7,7 @@ export const uiConfig = {
       y: 30,
     },
     fontConfig: "20px pixel",
-    fontStyle: "#0095DD",
+    fontStyle: "#ffffff",
   },
   playerLives: {
     coordinates: {
@@ -15,7 +15,7 @@ export const uiConfig = {
       y: 30,
     },
     fontConfig: "20px pixel",
-    fontStyle: "#0095DD",
+    fontStyle: "#ffffff",
     icon: constants.PLAYER_IMGS[0],
     iconSize: {
         x: 16*2,

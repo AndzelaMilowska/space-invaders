@@ -10,8 +10,8 @@ export const playerConfig: CharacterConfig = {
         x: 2,
         y: 0
     },
-    imgs: constants.PLAYER_IMGS,
-    currentImg: constants.PLAYER_IMGS[0],
+    baseAnimationFrames: constants.PLAYER_IMGS,
+    currentBaseAnimationFrame: constants.PLAYER_IMGS[0],
     lives: 3,
 
 }
