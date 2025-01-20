@@ -41,6 +41,8 @@ game.renderApplication();
 
 /* 
     TODO list:
+    FIX Enemies ATTACK
+
     - unit tests !!!!!
     
     - freeze player position after death
@@ -57,14 +59,7 @@ game.renderApplication();
 
 
 
-    refractor moveEnemiesTable()  - more descriptive and flexible --> enemies types and amount in config
-   change animation to loop - changeDisplayedImg
    add death animations
-
-   detectPlaterCollision
-   collision calculations should be ideally generic, 
-    the same logic shoulc should apply whether you collide with enemy or player. 
-    Refactor to account this.
 
     Why attack and element has separete drawers? 
     It should not be a concern to drawer what type of entity is being drawn.

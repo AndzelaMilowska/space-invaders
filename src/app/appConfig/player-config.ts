@@ -1,5 +1,6 @@
 import { constants } from "../constants/constants";
 import { CharacterConfig } from "../interfaces/character-config.interface";
+import { bulletsConfig_01 } from "./bullets-config-01";
 
 export const playerConfig: CharacterConfig = {
     size: {
@@ -12,7 +13,9 @@ export const playerConfig: CharacterConfig = {
     },
     baseAnimationFrames: constants.PLAYER_IMGS,
     currentBaseAnimationFrame: constants.PLAYER_IMGS[0],
+    indexOfCurrentFrame: 0,
     lives: 3,
+    fireType: bulletsConfig_01
 
 }
 

@@ -11,15 +11,16 @@ export class GameplayActions {
   }
 
   isWin(interval: NodeJS.Timeout) {
-    if (this.gameConfig.enemiesConfig.rowsCount * this.gameConfig.enemiesConfig.columnsCount === this.gameData.killsCount) {
-      alert("YOU WIN, CONGRATULATIONS!");
-      document.location.reload();
-      clearInterval(interval);
-    } else if(this.gameData.player.lives < 1) {
-      alert("YOU DIED");
-      document.location.reload();
-      clearInterval(interval);
-    }
+    //change enemiesCount to count down into zero so is win if enemiesCount === 0 
+    // if (this.gameConfig.enemiesConfig.enemiesCount === this.gameData.killsCount) {
+    //   alert("YOU WIN, CONGRATULATIONS!");
+    //   document.location.reload();
+    //   clearInterval(interval);
+    // } else if(this.gameData.player.lives < 1) {
+    //   alert("YOU DIED");
+    //   document.location.reload();
+    //   clearInterval(interval);
+    // }
   }
 
   runGame() {

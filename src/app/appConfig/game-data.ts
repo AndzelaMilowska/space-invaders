@@ -11,6 +11,7 @@ export class GameplayData extends Config implements GameData {
       y: this.canvasConfig.y - this.playerConfig.size.y - 20,
     },
     lives: this.playerConfig.lives,
+    type: this.playerConfig
   };
   enemies: CharacterData[][] = [];
   playerShots: Coordinates2D[] = [];
@@ -18,10 +19,11 @@ export class GameplayData extends Config implements GameData {
   killsCount: number = 0;
   enemyShots: Coordinates2D[] = [];
   enemiesTable = {
-    skippedFrameCounter: 0,
+    skippedFrameCounter: 50,
     coordinates: {
       x: 0,
       y: 0
     }
   }
+
 }

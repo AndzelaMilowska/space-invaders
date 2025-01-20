@@ -7,9 +7,9 @@ export class CollisionDetector {
   detectCollision (
     collidersArray: Coordinates2D[],
     elementData: CharacterData,
-    elementConfig: CharacterConfig,
     callbackTasks?: Function,
   ) {
+    const elementConfig = elementData.type
     if(elementData.lives < 1) {return}
     for (let i = 0; i < collidersArray.length; i++) {
       const elementLeftLedge = elementData.coordinates.x;

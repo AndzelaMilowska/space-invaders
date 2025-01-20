@@ -5,8 +5,10 @@ import { CharacterData } from "../interfaces/character-data.interface";
 import { CharacterConfig } from "../interfaces/character-config.interface";
 
 export class Drawer extends Canvas {
-  drawElement(characterData: CharacterData, elementConfig: CharacterConfig) {
+  drawElement(characterData: CharacterData) {
     let baseImage = new Image();
+    let elementConfig = characterData.type
+    elementConfig.currentBaseAnimationFrame = elementConfig.baseAnimationFrames[elementConfig.indexOfCurrentFrame]
     baseImage.src = elementConfig.currentBaseAnimationFrame
 
     this.canvasContext.imageSmoothingEnabled = false;
@@ -20,10 +22,10 @@ export class Drawer extends Canvas {
     );
   }
 
+  //remove draw rect, add animations for bullets
   drawRect(rectData: Coordinates2D, rectConfig: ElementConfig, style: string) {
     this.canvasContext.beginPath();
     this.canvasContext.rect(rectData.x, rectData.y, rectConfig.size.x, rectConfig.size.y);
-    //create separate file for styles strings
     this.canvasContext.fillStyle = style;
     this.canvasContext.fill();
     this.canvasContext.closePath();

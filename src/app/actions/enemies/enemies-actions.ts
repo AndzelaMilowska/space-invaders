@@ -1,6 +1,8 @@
 import { Config } from "../../appConfig/game-config";
 import { GameplayData } from "../../appConfig/game-data";
 import { CharacterConfig } from "../../interfaces/character-config.interface";
+import { CharacterData } from "../../interfaces/character-data.interface";
+import { EnemiesTable2D } from "../../interfaces/enemies-table-2D.interface";
 export class EnemiesActions {
   gameData: GameplayData;
   gameConfig: Config;
@@ -9,77 +11,92 @@ export class EnemiesActions {
     this.gameData = gameData;
     this.gameConfig = gameConfig;
   }
-//refractor - more descriptive and flexible
-//Dont like the implem. each for should be a separate entity represented with class that has methods handling movement.
-  moveEnemiesTable() {
-    const { enemiesTable } = this.gameData;
-    const { enemiesConfig, canvasConfig, enemyConfig } = this.gameConfig;
 
-    if (enemiesTable.skippedFrameCounter === enemiesConfig.frameSkip) {
-      this.changeDisplayedImg(enemyConfig)
-      if (
-        this.findEnemiesTableRightEdge().coordinates.x + enemiesConfig.frameStep.x + enemyConfig.size.x >= canvasConfig.x ||
-        this.findEnemiesTableLeftEdge().coordinates.x + enemiesConfig.frameStep.x <= 0
-      ) {
-        enemiesTable.coordinates.y = enemiesTable.coordinates.y - enemiesConfig.frameStep.y;
-        enemiesConfig.frameStep.x = enemiesConfig.frameStep.x * -1;
-        enemiesConfig.frameSkip = enemiesConfig.frameSkip <= 10 ? enemiesConfig.frameSkip : enemiesConfig.frameSkip - enemiesConfig.speedProgression;
+  //run enemies actions only on desired frame counts
+  runEnemiesActions() {
+    const { enemiesTable } = this.gameData;
+    const { enemiesConfig } = this.gameConfig;
+
+    //make action only on desired frame count
+    if (enemiesTable.skippedFrameCounter !== enemiesConfig.frameSkip) {
+      enemiesTable.skippedFrameCounter++;
+      return;
+    } else {
+      this.changeDisplayedImg(enemiesConfig.enemiesTable[0].type);
+      this.changeDisplayedImg(enemiesConfig.enemiesTable[1].type);
+      enemiesTable.skippedFrameCounter = 0;
+      
+      const rightmostEnemy = this.findRightmostEnemy();
+      const leftmostEnemy = this.findLeftmostEnemy();
+
+      if (this.isCanvasTouched(leftmostEnemy, rightmostEnemy)) {
+        this.onCanvasWallTouch();
         enemiesTable.skippedFrameCounter = 0;
       } else {
         enemiesTable.coordinates.x = enemiesTable.coordinates.x + enemiesConfig.frameStep.x;
         enemiesTable.skippedFrameCounter = 0;
       }
-    } else {
-      enemiesTable.skippedFrameCounter++;
     }
   }
 
-  //change animation to loop 
-  //dont use magic numbers like 0, 1, use variable that describes why it is 0 or 1, or add comment
-  //it shouldn't be in enemies actions
-  changeDisplayedImg(enemyConfig: CharacterConfig) {
-    //take element and animation array
-    //move into next animation frame (array element) or get back to first
-    //set new animation frame to element
-    const imgSource = enemyConfig.currentBaseAnimationFrame === enemyConfig.baseAnimationFrames[0] ? enemyConfig.baseAnimationFrames[1] : enemyConfig.baseAnimationFrames[0]
-    enemyConfig.currentBaseAnimationFrame = imgSource
+  isCanvasTouched(leftmostEnemy: CharacterData, rightmostEnemy: CharacterData): boolean {
+    const { enemiesConfig, canvasConfig } = this.gameConfig;
+    return (
+      rightmostEnemy.coordinates.x + enemiesConfig.frameStep.x + rightmostEnemy.type.size.x >= canvasConfig.x ||
+      leftmostEnemy.coordinates.x + enemiesConfig.frameStep.x <= 0
+    );
   }
 
-  findEnemiesTableLeftEdge() {
-    const { enemies } = this.gameData;
-    let i = 0;
-    let j = 0;
-    do {
-      if (j >= enemies[i].length - 1) {
-        j = 0;
-        i++;
-      } else {
-        j++;
-      }
-    } while (enemies[i][j].lives < 1);
-    return enemies[i][j];
+  onCanvasWallTouch() {
+    const { enemiesTable } = this.gameData;
+    const { enemiesConfig } = this.gameConfig;
+    enemiesTable.coordinates.y = enemiesTable.coordinates.y - enemiesConfig.frameStep.y; //move fleet vertically
+    enemiesConfig.frameStep.x = enemiesConfig.frameStep.x * -1; //change fleet direction
+    enemiesConfig.frameSkip =
+      enemiesConfig.frameSkip <= 10 ? enemiesConfig.frameSkip : enemiesConfig.frameSkip - enemiesConfig.speedProgression; //speed up fleet movement
   }
 
-  findEnemiesTableRightEdge() {
-    const { enemies } = this.gameData;
+  //it shouldn't be in enemies actions -- class "AnimationHandler"
+  changeDisplayedImg(elementConfig: CharacterConfig) {
+    elementConfig.indexOfCurrentFrame =
+      elementConfig.indexOfCurrentFrame === elementConfig.baseAnimationFrames.length - 1 ? 0 : elementConfig.indexOfCurrentFrame + 1;
+  }
 
-    let i = enemies.length - 1;
-    let j = enemies[enemies.length - 1].length - 1;
-    do {
-      if (j === 0) {
-        i--;
-        j = enemies[j].length - 1;
+  findLeftmostEnemy() {
+    const { enemies } = this.gameData;
+    let rowIndex = 0; //i
+    let columnIndex = 0;
+    while (enemies[rowIndex][columnIndex].lives < 1) {
+      if (columnIndex >= enemies[rowIndex].length - 1) {
+        columnIndex = 0;
+        rowIndex++;
       } else {
-        j--;
+        columnIndex++;
       }
-    } while (enemies[i][j] && enemies[i][j].lives <= 0);
-    return enemies[i][j];
+    }
+    return enemies[rowIndex][columnIndex];
+  }
+
+  findRightmostEnemy() {
+    const { enemies } = this.gameData;
+    let rowIndex = enemies.length - 1;
+    let columnIndex = enemies[enemies.length - 1].length - 1;
+    while (enemies[rowIndex][columnIndex] && enemies[rowIndex][columnIndex].lives <= 0) {
+      if (columnIndex === 0) {
+        rowIndex--;
+        columnIndex = enemies[rowIndex].length - 1;
+      } else {
+        columnIndex--;
+      }
+    }
+    return enemies[rowIndex][columnIndex];
   }
   //
-//What if we introduce different enemy types, which for example fire are faster rate. The behavior of the entity should be descrivbed by it's class not by the class that handles it.
+  //What if we introduce different enemy types, which for example fire are faster rate. The behavior of the entity should be described by it's class not by the class that handles it.
+  /* 
   enemiesAttack() {
     const { enemies, enemyShots } = this.gameData;
-    const { enemyConfig } = this.gameConfig;
+    const { enemyConfig } = this.gameConfig.enemiesConfig.enemiesTypesList[0];
 
     const minTime = 0.2
     const maxTime = 3
@@ -100,4 +117,7 @@ export class EnemiesActions {
       this.enemiesAttack()
     }, randomTime)
   }
+    */
 }
+//problem? każdy typ przeciwnika powinien mieć osobne strzelanie --> attack jako metoda przyjmująca config
+//czy kazdy przeciwnik powinien strzelać?

@@ -5,3 +5,4 @@ export interface Table2D {
     offsetTop: number,
     offsetLeft: number,
 }
+

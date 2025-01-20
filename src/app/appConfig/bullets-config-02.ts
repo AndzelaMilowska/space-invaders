@@ -1,5 +1,5 @@
-import {ElementConfig} from '../interfaces/element-config.interface'
-export const bulletsConfig_02: ElementConfig = {
+import { BulletConfig } from '../interfaces/bullet-config.interface'
+export const bulletsConfig_02: BulletConfig = {
     frameStep: {
       x: 0,
       y: -1,
@@ -9,5 +9,7 @@ export const bulletsConfig_02: ElementConfig = {
       y: 15,
     },
     baseAnimationFrames: [],
-    currentBaseAnimationFrame: ''
+    currentBaseAnimationFrame: '',
+    indexOfCurrentFrame: 0,
+    damage: 1
   }

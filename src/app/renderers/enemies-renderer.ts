@@ -10,6 +10,7 @@ import { Table2D } from "../interfaces/table-2D.interface";
 import { Player } from "../actions/player/player-actions";
 import { EnemiesActions } from "../actions/enemies/enemies-actions";
 import { CollisionDetector } from "../actions/collision-detector";
+import { EnemiesTable2D } from "../interfaces/enemies-table-2D.interface";
 
 export class EnemiesRenderer {
   enemiesDrawer: EnemiesDrawer;
@@ -42,19 +43,21 @@ export class EnemiesRenderer {
   }
 
   renderEnemies() {
-    this.enemiesActions.moveEnemiesTable();
-    this.enemiesDrawer.drawEnemies(this.config, this.gameData);
-    this.detectEnemiesCollision(this.gameData, this.config.enemiesConfig, this.config.enemyConfig);
-    this.attacksDrawer.drawShots(this.config.bulletsConfig_02, this.gameData.enemyShots);
+    //temp commented out
+    this.enemiesDrawer.drawEnemies(this.gameData, this.config.enemiesConfig);
+    this.enemiesActions.runEnemiesActions();
+    this.detectEnemiesCollision(this.gameData, this.config.enemiesConfig);
+    // this.attacksDrawer.drawShots(this.config.bulletsConfig_02, this.gameData.enemyShots);
   }
 
-  detectEnemiesCollision(gameData: GameData, enemiesConfig: Table2D, enemyConfig: CharacterConfig): void {
+  //put in separated class for enemies collision
+  detectEnemiesCollision(gameData: GameData, enemiesConfig: EnemiesTable2D): void {
     let playerShots: Coordinates2D[] = gameData.playerShots;
-    for (let c = 0; c < enemiesConfig.columnsCount; c++) {
-      for (let r = 0; r < enemiesConfig.rowsCount; r++) {
-        const enemy = gameData.enemies[c][r];
-        this.collisionDetector.detectCollision(playerShots, enemy, enemyConfig, () => {
-          gameData.score = gameData.score + enemyConfig.scorePrice;
+    for (let row = 0; row < gameData.enemies.length; row++) {
+      for (let column = 0; column < gameData.enemies[row].length; column++) {
+        const enemy = gameData.enemies[row][column];
+        this.collisionDetector.detectCollision(playerShots, enemy, () => {
+          gameData.score = gameData.score + enemy.type.scorePrice;
           gameData.killsCount++;
         });
       }

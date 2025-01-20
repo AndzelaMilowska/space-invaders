@@ -27,8 +27,9 @@ export class PlayerRenderer {
     const { enemyShots, player, playerShots } = this.gameData;
     const { playerConfig } = this.config;
     this.player.movePlayer(this.config, this.gameData);
-    this.drawer.drawElement(player, playerConfig);
-    this.attacksDrawer.drawShots(this.config.bulletsConfig_01, playerShots); // move to player
-    this.collisionDetector.detectCollision(enemyShots, player, playerConfig)
+    this.drawer.drawElement(player);
+    //temp commented out
+    this.attacksDrawer.drawShots(playerConfig.fireType, playerShots); // move to player
+    //this.collisionDetector.detectCollision(enemyShots, player)
   }
 }
