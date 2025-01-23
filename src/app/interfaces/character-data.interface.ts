@@ -1,8 +1,8 @@
 import { CharacterConfig } from "./character-config.interface";
-import { Coordinates2D } from "./coordinates-2D.interface";
+import {ElementData} from './element-data.interface'
 
-export interface CharacterData {
-    coordinates: Coordinates2D,
+export interface CharacterData extends ElementData {
     lives: number,
     type: CharacterConfig
+    bulletCountdown?: number
 }

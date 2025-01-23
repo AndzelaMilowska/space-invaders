@@ -2,11 +2,9 @@ import { EnemiesTable2D } from "../interfaces/enemies-table-2D.interface";
 import { enemyConfig01 } from "./enemy01-config";
 import { enemyConfig02 } from "./enemy02-config";
 export const enemiesConfig: EnemiesTable2D = {
-  totalRowsCount: 5,
-  //enemies count should be in game data
+  totalRowsCount: 0,
   enemiesCount: 0,
   columnsCount: 11,
-  // padding: 10,
   offsetTop: 50,
   offsetLeft: 200,
   frameStep: {

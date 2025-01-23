@@ -1,11 +1,10 @@
-import { Coordinates2D } from "../interfaces/coordinates-2D.interface";
-import { CharacterConfig } from "../interfaces/character-config.interface";
 import { CharacterData } from "../interfaces/character-data.interface";
+import { ElementData } from "../interfaces/element-data.interface";
 
 export class CollisionDetector {
   //add colliderConfig to data in collidersArray (each collider should have "type" pointing to specific config (size, damage?)) 
-  detectCollision (
-    collidersArray: Coordinates2D[],
+  static detectCollision (
+    collidersArray: ElementData[],
     elementData: CharacterData,
     callbackTasks?: Function,
   ) {
@@ -17,10 +16,10 @@ export class CollisionDetector {
       const elementTopLedge = elementData.coordinates.y;
       const elementBotLedge = elementTopLedge + elementConfig.size.y;
       if (
-        collidersArray[i].x >= elementLeftLedge &&
-        collidersArray[i].x <= elementRightLedge &&
-        collidersArray[i].y >= elementTopLedge &&
-        collidersArray[i].y <= elementBotLedge
+        collidersArray[i].coordinates.x >= elementLeftLedge &&
+        collidersArray[i].coordinates.x <= elementRightLedge &&
+        collidersArray[i].coordinates.y >= elementTopLedge &&
+        collidersArray[i].coordinates.y <= elementBotLedge
       ) {
         collidersArray.splice(i, 1);
         elementData.lives--;
@@ -31,4 +30,5 @@ export class CollisionDetector {
       }
     }
   }
+  
 }

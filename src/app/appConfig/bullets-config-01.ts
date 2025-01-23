@@ -1,15 +1,17 @@
+import { constants } from '../constants/constants'
 import { BulletConfig } from '../interfaces/bullet-config.interface'
 export const bulletsConfig_01: BulletConfig = {
     frameStep: {
       x: 0,
-      y: 2,
+      y: -3,
     },
     size: {
-      x: 5,
-      y: 15,
+      x: 7,
+      y: 21,
     },
-    baseAnimationFrames: [],
+    baseAnimationFrames: constants.FIRE_02_IMGS,
     currentBaseAnimationFrame: '',
     indexOfCurrentFrame: 0,
-    damage: 1
+    damage: 1,
+    frameSkip: 15
   }

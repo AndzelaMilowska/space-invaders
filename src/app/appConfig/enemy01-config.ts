@@ -17,6 +17,11 @@ export const enemyConfig01: CharacterConfig = {
       currentBaseAnimationFrame: '',
       indexOfCurrentFrame: 0,
       scorePrice: 10,
-      fireType: bulletsConfig_02
+      fireType: bulletsConfig_02,
+      fireFrequency: {
+        min: 200,
+        max: 3000
+      },
+      frameSkip: 50
   }
   

@@ -8,4 +8,5 @@ export interface ElementConfig {
   //should currentBaseAnimationFrame be in element data? 
   currentBaseAnimationFrame: string;
   indexOfCurrentFrame: number;
+  frameSkip: number
 }

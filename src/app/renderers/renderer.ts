@@ -49,6 +49,7 @@ export class Renderer extends Canvas {
         this.enemiesRenderer.renderEnemies()
         this.uiRenderer.renderUI()
         this.gameplayActions.isWin(this.interval)
+        this.gameData.currentFrameIndex += 1
       }, 10);
     }
 

@@ -3,9 +3,10 @@ import { Canvas } from "../canvas";
 import { Coordinates2D } from "../interfaces/coordinates-2D.interface";
 import { CharacterData } from "../interfaces/character-data.interface";
 import { CharacterConfig } from "../interfaces/character-config.interface";
+import { ElementData } from "../interfaces/element-data.interface";
 
 export class Drawer extends Canvas {
-  drawElement(characterData: CharacterData) {
+  drawElement(characterData: CharacterData | ElementData) {
     let baseImage = new Image();
     let elementConfig = characterData.type
     elementConfig.currentBaseAnimationFrame = elementConfig.baseAnimationFrames[elementConfig.indexOfCurrentFrame]
@@ -20,15 +21,6 @@ export class Drawer extends Canvas {
       elementConfig.size.x,
       elementConfig.size.y
     );
-  }
-
-  //remove draw rect, add animations for bullets
-  drawRect(rectData: Coordinates2D, rectConfig: ElementConfig, style: string) {
-    this.canvasContext.beginPath();
-    this.canvasContext.rect(rectData.x, rectData.y, rectConfig.size.x, rectConfig.size.y);
-    this.canvasContext.fillStyle = style;
-    this.canvasContext.fill();
-    this.canvasContext.closePath();
   }
 
   drawText (textData: string, coordinates: Coordinates2D, fontConfig: string, fontStyle: string) {

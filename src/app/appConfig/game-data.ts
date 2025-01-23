@@ -3,7 +3,9 @@ import { GameData } from "../interfaces/game-data.interface";
 import { CharacterData } from "../interfaces/character-data.interface";
 import { Coordinates2D } from "../interfaces/coordinates-2D.interface";
 import {ApplicationStatus} from '../constants/application-status.enum'
+import { ElementData } from "../interfaces/element-data.interface";
 export class GameplayData extends Config implements GameData {
+  currentFrameIndex: number = 0;
   gameStatus = ApplicationStatus.StartScreen;
   player: CharacterData = {
     coordinates: {
@@ -14,10 +16,10 @@ export class GameplayData extends Config implements GameData {
     type: this.playerConfig
   };
   enemies: CharacterData[][] = [];
-  playerShots: Coordinates2D[] = [];
+  playerShots: ElementData[] = [];
   score: number = 0;
   killsCount: number = 0;
-  enemyShots: Coordinates2D[] = [];
+  enemyShots: ElementData[] = [];
   enemiesTable = {
     skippedFrameCounter: 50,
     coordinates: {

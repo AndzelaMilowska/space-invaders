@@ -1,35 +1,31 @@
 import { Config } from "../appConfig/game-config";
 import { Drawer } from "../drawers/base-drawer";
-import { Player } from "../actions/player/player-actions";
+import { PlayerActions } from "../actions/player/player-actions";
 import { GameplayData } from "../appConfig/game-data";
-import { AttackDrawer } from "../drawers/attack-drawer";
 import {CollisionDetector} from '../actions/collision-detector'
+import { AttacksRenderer } from "./attacks-renderer";
 
 export class PlayerRenderer {
     drawer: Drawer;
-    player: Player;
+    player: PlayerActions;
     config: Config;
     gameData: GameplayData;
-    attacksDrawer: AttackDrawer;
-    collisionDetector: CollisionDetector
-  
-    constructor(drawer: Drawer, player: Player, config: Config, gameData: GameplayData, attacksDrawer: AttackDrawer, collisionDetector: CollisionDetector) {
+    attacksRenderer: AttacksRenderer
+
+    constructor(drawer: Drawer, player: PlayerActions, config: Config, gameData: GameplayData,   attacksRenderer: AttacksRenderer) {
       this.drawer = drawer;
       this.player = player;
       this.config = config;
       this.gameData = gameData;
-      this.attacksDrawer = attacksDrawer;
-      this.collisionDetector = collisionDetector
-
+      this.attacksRenderer = attacksRenderer
     }
 
   renderPlayer() {
-    const { enemyShots, player, playerShots } = this.gameData;
-    const { playerConfig } = this.config;
+    let { enemyShots, player, playerShots } = this.gameData;
+    player.bulletCountdown--
     this.player.movePlayer(this.config, this.gameData);
     this.drawer.drawElement(player);
-    //temp commented out
-    this.attacksDrawer.drawShots(playerConfig.fireType, playerShots); // move to player
-    //this.collisionDetector.detectCollision(enemyShots, player)
+    this.attacksRenderer.renderBullets(playerShots, this.gameData)
+    CollisionDetector.detectCollision(enemyShots, player)
   }
 }

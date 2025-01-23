@@ -15,7 +15,12 @@ export const playerConfig: CharacterConfig = {
     currentBaseAnimationFrame: constants.PLAYER_IMGS[0],
     indexOfCurrentFrame: 0,
     lives: 3,
-    fireType: bulletsConfig_01
+    fireType: bulletsConfig_01,
+    fireFrequency: {
+        min: 50,
+        max: 55
+      },
+      frameSkip: 1000
 
 }
 
