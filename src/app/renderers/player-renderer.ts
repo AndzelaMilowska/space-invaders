@@ -22,10 +22,16 @@ export class PlayerRenderer {
 
   renderPlayer() {
     let { enemyShots, player, playerShots } = this.gameData;
-    player.bulletCountdown--
-    this.player.movePlayer(this.config, this.gameData);
-    this.drawer.drawElement(player);
+    if (player.timeToRespawn > 0) {
+      player.timeToRespawn--
+    }
+    else {
+      player.bulletCountdown--
+      this.player.movePlayer(this.config, this.gameData);
+      this.drawer.drawElement(player);
+      CollisionDetector.detectCollision(enemyShots, player, this.gameData.currentExplosions, () => {player.timeToRespawn = player.type.timeToRespawn})
+    }
     this.attacksRenderer.renderBullets(playerShots, this.gameData)
-    CollisionDetector.detectCollision(enemyShots, player)
+
   }
 }

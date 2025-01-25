@@ -1,6 +1,7 @@
 import { constants } from "../constants/constants";
 import { CharacterConfig } from "../interfaces/character-config.interface";
 import { bulletsConfig_02 } from "./bullets-config-02"; 
+import { explosionConfig_02 } from "./explosion-config-02";
 
 export const enemyConfig02: CharacterConfig = {
     size: {
@@ -22,5 +23,6 @@ export const enemyConfig02: CharacterConfig = {
         min: 400,
         max: 3000
       },
-      frameSkip: 50
+      frameSkip: 50,
+        deathAnimationConfig: explosionConfig_02,
   }

@@ -15,8 +15,8 @@ export class AttackActions {
     }
     const newBullet: ElementData = {
       coordinates: {
-        x: character.coordinates.x,
-        y: character.coordinates.y,
+        x: character.coordinates.x + character.type.size.x / 2,
+        y: character.coordinates.y
       },
       type: character.type.fireType,
     };

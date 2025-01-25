@@ -13,6 +13,7 @@ import { GameplayActions } from "./app/actions/gameplayActions";
 import { UIRenderer } from "./app/renderers/ui-renderer";
 import { UIDrawer } from "./app/drawers/ui-drawer";
 import {AttacksRenderer} from './app/renderers/attacks-renderer'
+import { ExplosionRenderer } from "./app/renderers/explosion-renderer";
 
 const gameConfig = new Config();
 const gameData = new GameplayData();
@@ -31,16 +32,19 @@ const attacksRenderer = new AttacksRenderer(drawer)
 const uiDrawer = new UIDrawer("myCanvas", gameConfig.canvasConfig)
 
 const playerRenderer = new PlayerRenderer(drawer, playerActions, gameConfig, gameData, attacksRenderer);
+const explosionsRenderer = new ExplosionRenderer(drawer)
 const enemiesRenderer = new EnemiesRenderer( gameConfig, gameData, enemiesDrawer, attacksRenderer);
 const uiRenderer = new UIRenderer(uiDrawer, gameData, gameConfig.uiConfig)
-const game = new Renderer("myCanvas", gameConfig, gameData, playerRenderer, gameInit, enemiesRenderer, gameplayActions, uiRenderer);
+const game = new Renderer("myCanvas", gameConfig, gameData, playerRenderer, gameInit, enemiesRenderer, gameplayActions, uiRenderer, explosionsRenderer);
 
 game.renderApplication();
 
 /* 
     TODO list:
-    -add death animations --> separate method for death animation - display animation in position of death
+
+    - add death animations --> separate method for death animation - display animation in position of death
     - freeze player position after death
+
     - unit tests !!!!!
     
 

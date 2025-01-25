@@ -7,6 +7,7 @@ import {EnemiesRenderer} from "./enemies-renderer"
 import {GameplayActions} from "../actions/gameplayActions"
 import {UIRenderer} from "./ui-renderer"
 import { ApplicationStatus } from "../constants/application-status.enum";
+import {ExplosionRenderer} from './explosion-renderer'
 
 export class Renderer extends Canvas {
   interval: NodeJS.Timeout;
@@ -17,6 +18,7 @@ export class Renderer extends Canvas {
   playerRenderer: PlayerRenderer;
   enemiesRenderer: EnemiesRenderer;
   uiRenderer: UIRenderer;
+  explosionsRenderer: ExplosionRenderer
 
   constructor(
     canvasId: string,
@@ -27,6 +29,7 @@ export class Renderer extends Canvas {
     enemiesRenderer: EnemiesRenderer,
     gameplayActions: GameplayActions,
     uiRenderer: UIRenderer,
+    explosionsRenderer: ExplosionRenderer
   ) {
     super(canvasId, configObject.canvasConfig);
     this.config = configObject;
@@ -36,6 +39,7 @@ export class Renderer extends Canvas {
     this.gameplayActions = gameplayActions
     this.uiRenderer = uiRenderer
     this.gameData = gameData
+    this.explosionsRenderer = explosionsRenderer
   }
 
   renderGame() {
@@ -47,6 +51,7 @@ export class Renderer extends Canvas {
         this.canvasContext.clearRect(0, 0, this.config.canvasConfig.x, this.config.canvasConfig.y);
         this.playerRenderer.renderPlayer()
         this.enemiesRenderer.renderEnemies()
+        this.explosionsRenderer.renderExplosions(this.gameData.currentExplosions)
         this.uiRenderer.renderUI()
         this.gameplayActions.isWin(this.interval)
         this.gameData.currentFrameIndex += 1

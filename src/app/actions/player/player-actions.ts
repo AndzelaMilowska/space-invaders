@@ -13,6 +13,7 @@ export class PlayerActions extends AttackActions{
   }
 
   detectMovement() {
+    // if (!movementActive) return
     document.addEventListener(
       "keydown",
       (e) => {
@@ -25,6 +26,7 @@ export class PlayerActions extends AttackActions{
       false
     );
     document.addEventListener(
+      // if (!movementActive) return
       "keyup",
       (e) => {
         if (e.key === "Right" || e.key === "ArrowRight") {

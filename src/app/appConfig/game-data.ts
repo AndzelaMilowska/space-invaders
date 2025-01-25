@@ -4,6 +4,7 @@ import { CharacterData } from "../interfaces/character-data.interface";
 import { Coordinates2D } from "../interfaces/coordinates-2D.interface";
 import {ApplicationStatus} from '../constants/application-status.enum'
 import { ElementData } from "../interfaces/element-data.interface";
+import { SpriteData } from "../interfaces/sprite-data.interface";
 export class GameplayData extends Config implements GameData {
   currentFrameIndex: number = 0;
   gameStatus = ApplicationStatus.StartScreen;
@@ -13,7 +14,8 @@ export class GameplayData extends Config implements GameData {
       y: this.canvasConfig.y - this.playerConfig.size.y - 20,
     },
     lives: this.playerConfig.lives,
-    type: this.playerConfig
+    type: this.playerConfig,
+    timeToRespawn: 0
   };
   enemies: CharacterData[][] = [];
   playerShots: ElementData[] = [];
@@ -27,5 +29,6 @@ export class GameplayData extends Config implements GameData {
       y: 0
     }
   }
+  currentExplosions: SpriteData[] = []
 
 }

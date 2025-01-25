@@ -5,4 +5,5 @@ export interface CharacterData extends ElementData {
     lives: number,
     type: CharacterConfig
     bulletCountdown?: number
+    timeToRespawn?: number
 }

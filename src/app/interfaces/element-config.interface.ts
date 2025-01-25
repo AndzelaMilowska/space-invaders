@@ -1,12 +1,6 @@
 import {Coordinates2D} from './coordinates-2D.interface'
-  
-export interface ElementConfig {
+  import {SpriteConfig} from './sprite-config.interface'
+export interface ElementConfig extends SpriteConfig{
   frameStep: Coordinates2D;
-  size: Coordinates2D;
   padding? : number;
-  baseAnimationFrames: string[];
-  //should currentBaseAnimationFrame be in element data? 
-  currentBaseAnimationFrame: string;
-  indexOfCurrentFrame: number;
-  frameSkip: number
 }

@@ -27,5 +27,14 @@ export const constants = {
     require('/Users/nela/Programowo/space-invaders/src/imgs/Fire03_02.png'),
     require('/Users/nela/Programowo/space-invaders/src/imgs/Fire03_03.png'),
     require('/Users/nela/Programowo/space-invaders/src/imgs/Fire03_04.png')
+   ],
+   ENEMY_01_EXPLOSION: [
+    require('/Users/nela/Programowo/space-invaders/src/imgs/kill.png')
+   ],
+   PLAYER_EXPLOSION: [
+    require('/Users/nela/Programowo/space-invaders/src/imgs/Player_death01.png'),
+    require('/Users/nela/Programowo/space-invaders/src/imgs/Player_death02.png'),
+    require('/Users/nela/Programowo/space-invaders/src/imgs/Player_death03.png')
    ]
+
 };
