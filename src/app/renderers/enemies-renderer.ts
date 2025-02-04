@@ -37,6 +37,4 @@ export class EnemiesRenderer extends EnemiesActions{
     this.attacksRenderer.renderBullets(this.gameData.enemyShots, this.gameData)
   }
 
-
-
 }

@@ -16,7 +16,7 @@ export const enemyConfig01: CharacterConfig = {
   baseAnimationFrames: constants.ENEMY_01_IMGS,
   currentBaseAnimationFrame: "",
   indexOfCurrentFrame: 0,
-  scorePrice: 10,
+  scorePrice: 20,
   fireType: bulletsConfig_02,
   fireFrequency: {
     min: 200,

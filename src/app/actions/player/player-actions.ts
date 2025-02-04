@@ -13,7 +13,6 @@ export class PlayerActions extends AttackActions{
   }
 
   detectMovement() {
-    // if (!movementActive) return
     document.addEventListener(
       "keydown",
       (e) => {
@@ -26,7 +25,6 @@ export class PlayerActions extends AttackActions{
       false
     );
     document.addEventListener(
-      // if (!movementActive) return
       "keyup",
       (e) => {
         if (e.key === "Right" || e.key === "ArrowRight") {
@@ -44,9 +42,9 @@ export class PlayerActions extends AttackActions{
     let playerConfig = configObject.playerConfig;
     if (this.isRightKeyPressed) {
       //what are those random numbers?
-      playerData.coordinates.x = Math.min(playerData.coordinates.x + 7, configObject.canvasConfig.x - playerConfig.size.x);
+      playerData.coordinates.x = Math.min(playerData.coordinates.x + playerData.type.frameStep.x, configObject.canvasConfig.x - playerConfig.size.x);
     } else if (this.isLeftKeyPressed) {
-      playerData.coordinates.x = Math.max(playerData.coordinates.x - 7, 0);
+      playerData.coordinates.x = Math.max(playerData.coordinates.x - playerData.type.frameStep.x, 0);
     }
   }
 

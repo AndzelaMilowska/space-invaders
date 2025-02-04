@@ -1,26 +1,27 @@
 import { Config } from "../appConfig/game-config";
 import { GameplayData } from "../appConfig/game-data";
+import { ApplicationStatus } from "../constants/application-status.enum";
+import { UiActions } from "./ui-actions";
 
-export class GameplayActions {
+export class GameplayActions extends UiActions{
   gameConfig: Config;
   gameData: GameplayData;
 
   constructor(gameConfig: Config, gameData: GameplayData) {
+    super()
     this.gameConfig = gameConfig;
     this.gameData = gameData;
   }
 
-  isWin(interval: NodeJS.Timeout) {
-    //change enemiesCount to count down into zero so is win if enemiesCount === 0 
-    // if (this.gameConfig.enemiesConfig.enemiesCount === this.gameData.killsCount) {
-    //   alert("YOU WIN, CONGRATULATIONS!");
-    //   document.location.reload();
-    //   clearInterval(interval);
-    // } else if(this.gameData.player.lives < 1) {
-    //   alert("YOU DIED");
-    //   document.location.reload();
-    //   clearInterval(interval);
-    // }
+  isWin() {
+    if (this.gameConfig.enemiesConfig.enemiesCount === this.gameData.killsCount) {
+      this.gameData.endgameTime++
+      this.gameData.gameStatus = ApplicationStatus.GameWin
+    } else if(this.gameData.player.lives < 1) {
+      this.gameData.endgameTime++
+      this.gameData.gameStatus = ApplicationStatus.GameLoose
+    }
+
   }
 
   runGame() {

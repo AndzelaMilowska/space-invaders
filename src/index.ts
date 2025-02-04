@@ -42,9 +42,6 @@ game.renderApplication();
 /* 
     TODO list:
 
-    - add death animations --> separate method for death animation - display animation in position of death
-    - freeze player position after death
-
     - unit tests !!!!!
     
 

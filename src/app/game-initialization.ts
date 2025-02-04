@@ -18,20 +18,17 @@ export class GameInitialization {
     this.enemiesActions = enemiesActions;
   }
 
-  initGameData(): void {
+  initializeGame(): void {
     this.config.enemiesConfig.offsetLeft = this.config.countEnemiesLeftOffset(); //count left offset start point
     this.gameData.enemies = this.initializeEnemies(this.config.enemiesConfig);
+    this.calculateTotalEnemiesNumber(this.config.enemiesConfig)
     this.player.detectMovement();
     this.player.playerAttack(this.gameData);
+
   }
 
   calculateTotalEnemiesNumber(enemiesConfig: EnemiesTable2D) {
-    let rowsCounter = 0;
-    for (let i = 0; i < enemiesConfig.enemiesTable.length; i++) {
-      rowsCounter = rowsCounter + enemiesConfig.enemiesTable[i].rowsCount;
-    }
-    enemiesConfig.totalRowsCount = rowsCounter;
-    enemiesConfig.enemiesCount = rowsCounter * enemiesConfig.columnsCount;
+    enemiesConfig.enemiesCount = enemiesConfig.columnsCount * enemiesConfig.totalRowsCount
   }
 
   initializeEnemies(enemiesConfig: EnemiesTable2D) {
@@ -41,6 +38,7 @@ export class GameInitialization {
       const rowsStartIndex = enemiesArray.length;
       const rowsEndIndex = enemiesArray.length + enemiesTable[i].rowsCount;
       for (let row = rowsStartIndex; row < rowsEndIndex; row++) {
+        enemiesConfig.totalRowsCount++
         enemiesArray[row] = [];
         for (let column = 0; column < enemiesConfig.columnsCount; column++) {
           enemiesArray[row][column] = {

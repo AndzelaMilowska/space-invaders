@@ -1,8 +1,6 @@
 import { Config } from "../../appConfig/game-config";
 import { GameplayData } from "../../appConfig/game-data";
-import { CharacterConfig } from "../../interfaces/character-config.interface";
 import { CharacterData } from "../../interfaces/character-data.interface";
-import { EnemiesTable2D } from "../../interfaces/enemies-table-2D.interface";
 import { AnimationSequencer } from "../../drawers/animation-sequencer";
 import { AttackActions } from "../attack-actions";
 
@@ -58,7 +56,10 @@ export class EnemiesActions extends AttackActions {
     const { enemies } = this.gameData;
     let rowIndex = 0;
     let columnIndex = 0;
-    while (enemies[rowIndex][columnIndex].lives < 1) {
+    while (enemies[rowIndex] && enemies[rowIndex][columnIndex] && enemies[rowIndex][columnIndex].lives < 1) {
+      if (!rowIndex) {
+        return enemies[enemies.length - 1][enemies[enemies.length - 1].length - 1];
+      }
       if (columnIndex >= enemies[rowIndex].length - 1) {
         columnIndex = 0;
         rowIndex++;
@@ -74,6 +75,9 @@ export class EnemiesActions extends AttackActions {
     let rowIndex = enemies.length - 1;
     let columnIndex = enemies[enemies.length - 1].length - 1;
     while (enemies[rowIndex][columnIndex] && enemies[rowIndex][columnIndex].lives <= 0) {
+      if (!rowIndex) {
+        return enemies[enemies.length - 1][enemies[enemies.length - 1].length - 1];
+      }
       if (columnIndex === 0) {
         rowIndex--;
         columnIndex = enemies[rowIndex].length - 1;
@@ -81,6 +85,7 @@ export class EnemiesActions extends AttackActions {
         columnIndex--;
       }
     }
+
     return enemies[rowIndex][columnIndex];
   }
 

@@ -9,6 +9,6 @@ export let explosionConfig_01: SpriteConfig = {
   baseAnimationFrames: constants.PLAYER_EXPLOSION,
   currentBaseAnimationFrame: "",
   indexOfCurrentFrame: 0,
-  frameSkip: 10,
-  duration: 29
+  frameSkip: 15,
+  duration: 44
 };

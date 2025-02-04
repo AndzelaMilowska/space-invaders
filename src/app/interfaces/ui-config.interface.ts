@@ -11,4 +11,5 @@ export interface UIElementInterface {
   fontStyle: string;
   icon?: string;
   iconSize?: Coordinates2D
+  text?: string
 }

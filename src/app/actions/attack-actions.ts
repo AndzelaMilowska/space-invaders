@@ -10,7 +10,7 @@ export class AttackActions {
   }
 
   spawnBullet(character: CharacterData, shootsArray: ElementData[]) {
-    if (character.bulletCountdown > 0) {
+    if (character.bulletCountdown > 0 || character.lives <= 0) {
       return;
     }
     const newBullet: ElementData = {
