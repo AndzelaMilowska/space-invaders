@@ -10,6 +10,11 @@ export class CollisionDetector {
       return;
     }
     for (let i = 0; i < collidersArray.length; i++) {
+    if (collidersArray[i].coordinates.y <= 0 || collidersArray[i].coordinates.y >= 1000) {
+      collidersArray.splice(i, 1);
+      return
+    }
+
       const elementLeftLedge = elementData.coordinates.x;
       const elementRightLedge = elementLeftLedge + elementConfig.size.x;
       const elementTopLedge = elementData.coordinates.y;

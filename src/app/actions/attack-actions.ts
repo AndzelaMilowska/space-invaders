@@ -1,4 +1,3 @@
-import { Drawer } from "../drawers/base-drawer";
 import { CharacterData } from "../interfaces/character-data.interface";
 import { ElementData } from "../interfaces/element-data.interface";
 import { Frequency } from "../interfaces/frequency-interface";

@@ -15,16 +15,14 @@ export class GameplayActions extends UiActions{
 
   isWin() {
     if (this.gameConfig.enemiesConfig.enemiesCount === this.gameData.killsCount) {
-      this.gameData.endgameTime++
       this.gameData.gameStatus = ApplicationStatus.GameWin
     } else if(this.gameData.player.lives < 1) {
-      this.gameData.endgameTime++
       this.gameData.gameStatus = ApplicationStatus.GameLoose
+    }
+    if (this.gameData.gameStatus === ApplicationStatus.GameLoose || this.gameData.gameStatus === ApplicationStatus.GameWin) {
+      this.gameData.endgameTime++
     }
 
   }
 
-  runGame() {
-
-  }
 }

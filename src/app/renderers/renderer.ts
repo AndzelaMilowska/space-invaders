@@ -55,9 +55,9 @@ export class Renderer extends Canvas {
         this.uiRenderer.renderUI();
         this.gameplayActions.isWin();
         this.gameData.currentFrameIndex += 1;
-        if (this.gameData.endgameTime >=50) {
+        if (this.gameData.endgameTime >= 50) {
           clearInterval(this.interval);
-          this.renderApplication()
+          this.renderApplication();
         }
       }, 10);
     }
@@ -67,8 +67,9 @@ export class Renderer extends Canvas {
     this.uiRenderer.listenForAnyKeyClick(() => {
       this.gameData.gameStatus = ApplicationStatus.InGame;
       clearInterval(this.interval);
-      this.renderApplication()
+      this.renderApplication();
     });
+    
     this.interval = setInterval(() => {
       this.canvasContext.clearRect(0, 0, this.config.canvasConfig.x, this.config.canvasConfig.y);
       this.uiRenderer.renderStartScreen();
@@ -76,19 +77,18 @@ export class Renderer extends Canvas {
   }
 
   renderEndScreen(endStatus: ApplicationStatus) {
-    let message: string = ''
-if (endStatus === ApplicationStatus.GameLoose) {
-  message = menusConfig.gameLoose.text
-  this.uiRenderer.initiateGameEndSprites(this.gameData.enemies[1][1], this.gameData.enemies[3][3], menusConfig.gameLoose, 3);
-}
-else if (endStatus === ApplicationStatus.GameWin) { 
-  message = menusConfig.gameWin.text
-}
+    let message: string = "";
+
+    if (endStatus === ApplicationStatus.GameLoose) {
+      message = menusConfig.gameLoose.text;
+      this.uiRenderer.initiateGameEndSprites(this.gameData.enemies[1][1], this.gameData.enemies[3][3], menusConfig.gameLoose, 3);
+    } else if (endStatus === ApplicationStatus.GameWin) {
+      message = menusConfig.gameWin.text;
+    }
 
     this.uiRenderer.listenForAnyKeyClick(() => {
       this.gameData.gameStatus = ApplicationStatus.StartScreen;
       clearInterval(this.interval);
-      
       document.location.reload();
     });
 
@@ -102,8 +102,8 @@ else if (endStatus === ApplicationStatus.GameWin) {
   renderApplication() {
     if (this.gameData.gameStatus === ApplicationStatus.StartScreen) {
       this.renderStartScreen();
-      // add event listener --> any key pressed -->      // on any button click this.gameData.gameStatus = ApplicationStatus.InGame
     }
+
     if (this.gameData.gameStatus === ApplicationStatus.InGame) {
       this.renderGame();
     }
@@ -111,15 +111,5 @@ else if (endStatus === ApplicationStatus.GameWin) {
     if (this.gameData.gameStatus === ApplicationStatus.GameLoose || this.gameData.gameStatus === ApplicationStatus.GameWin) {
       this.renderEndScreen(this.gameData.gameStatus);
     }
-
-    /*
-    if (status === startScreen) {
-    interval 
-      - render buttons
-      - render instruction
-      - render points
-      - listen for click, on click status change, clear interval, run renderGame --> put in gameActions or smth
-    } 
-    */
   }
 }

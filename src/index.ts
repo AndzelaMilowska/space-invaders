@@ -41,16 +41,6 @@ game.renderApplication();
 
 /* 
     TODO list:
-
     - unit tests !!!!!
-    
-
-    - loose if enemies reach the bottom of the canvas
-
-
-    - win/ loose display - game over / you win & score -> return to menu button
-
-    - start screen
-    - back to start screen after loose
-
+    - add highest score 
 */

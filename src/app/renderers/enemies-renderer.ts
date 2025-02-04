@@ -30,6 +30,7 @@ export class EnemiesRenderer extends EnemiesActions{
     this.enemiesDrawer.drawEnemies(this.gameData, this.config.enemiesConfig);
     this.runEnemiesActions();
     this.iterateEnemies((enemy:CharacterData) => {
+      this.isOnBottom(enemy)
       enemy.bulletCountdown--
       EnemyCollisionDetector.detectEnemyCollision(this.gameData, enemy)
       this.spawnBullet(enemy, this.gameData.enemyShots)

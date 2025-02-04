@@ -3,6 +3,7 @@ import { GameplayData } from "../../appConfig/game-data";
 import { CharacterData } from "../../interfaces/character-data.interface";
 import { AnimationSequencer } from "../../drawers/animation-sequencer";
 import { AttackActions } from "../attack-actions";
+import { ApplicationStatus } from "../../constants/application-status.enum";
 
 export class EnemiesActions extends AttackActions {
   gameData: GameplayData;
@@ -96,5 +97,12 @@ export class EnemiesActions extends AttackActions {
         callbackFn(enemy);
       }
     }
+  }
+
+  isOnBottom(element: CharacterData) {
+    if (element.coordinates.y <= this.config.canvasConfig.y - this.config.canvasConfig.y/10) {
+      return;
+    }
+    this.gameData.gameStatus = ApplicationStatus.GameLoose;
   }
 }
