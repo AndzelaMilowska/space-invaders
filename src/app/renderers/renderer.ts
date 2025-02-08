@@ -69,7 +69,7 @@ export class Renderer extends Canvas {
       clearInterval(this.interval);
       this.renderApplication();
     });
-    
+
     this.interval = setInterval(() => {
       this.canvasContext.clearRect(0, 0, this.config.canvasConfig.x, this.config.canvasConfig.y);
       this.uiRenderer.renderStartScreen();
@@ -81,7 +81,7 @@ export class Renderer extends Canvas {
 
     if (endStatus === ApplicationStatus.GameLoose) {
       message = menusConfig.gameLoose.text;
-      this.uiRenderer.initiateGameEndSprites(this.gameData.enemies[1][1], this.gameData.enemies[3][3], menusConfig.gameLoose, 3);
+      this.uiRenderer.initiateGameEndSprites(this.gameData.enemies[0][0], this.gameData.enemies[this.gameData.enemies.length - 1][0], menusConfig.gameLoose, 3);
     } else if (endStatus === ApplicationStatus.GameWin) {
       message = menusConfig.gameWin.text;
     }
@@ -100,6 +100,7 @@ export class Renderer extends Canvas {
   }
 
   renderApplication() {
+    this.gameInit.findHighestScore()
     if (this.gameData.gameStatus === ApplicationStatus.StartScreen) {
       this.renderStartScreen();
     }

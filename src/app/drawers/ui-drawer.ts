@@ -8,7 +8,7 @@ import { SpriteConfig } from "../interfaces/sprite-config.interface";
 
 export class UIDrawer extends Drawer {
   drawScore(score: number, scoreConfig: UIElementInterface) {
-    this.drawText(`Score: ${score}`, scoreConfig.coordinates, scoreConfig.fontConfig, scoreConfig.fontStyle);
+    this.drawText(`Score: ${score.toFixed(5).substring(2)}`, scoreConfig.coordinates, scoreConfig.fontConfig, scoreConfig.fontStyle);
   }
 
   drawPlayerLives(livesData: number, livesStyleConfig: UIElementInterface) {
@@ -26,7 +26,7 @@ export class UIDrawer extends Drawer {
     }
   }
 
-  drawStartScreenTextElement(UIElement: UIElementInterface) {
+  drawStartScreenTextElement(UIElement: UIElementInterface, message?:string) {
     const { text, coordinates, fontConfig, fontStyle } = UIElement;
     this.drawCenteredText(text, coordinates, fontConfig, fontStyle);
   }

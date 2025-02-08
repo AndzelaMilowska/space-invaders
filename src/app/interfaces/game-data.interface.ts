@@ -17,4 +17,5 @@ export interface GameData {
   };
   currentFrameIndex: number,
   currentExplosions: SpriteData[]
+  highestScore: number
 }

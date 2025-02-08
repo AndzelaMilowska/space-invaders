@@ -4,6 +4,7 @@ import { CharacterData } from "./interfaces/character-data.interface";
 import { PlayerActions } from "./actions/player/player-actions";
 import { EnemiesActions } from "./actions/enemies/enemies-actions";
 import { EnemiesTable2D } from "./interfaces/enemies-table-2D.interface";
+import { menusConfig } from "./appConfig/menus-config";
 
 export class GameInitialization {
   config: Config;
@@ -24,7 +25,6 @@ export class GameInitialization {
     this.calculateTotalEnemiesNumber(this.config.enemiesConfig)
     this.player.detectMovement();
     this.player.playerAttack(this.gameData);
-
   }
 
   calculateTotalEnemiesNumber(enemiesConfig: EnemiesTable2D) {
@@ -52,5 +52,15 @@ export class GameInitialization {
       }
     }
     return enemiesArray;
+  }
+
+  findHighestScore() {
+    let score = localStorage.getItem("hi-score")
+    if (!score) {
+      score = "00000"
+      localStorage.setItem("hi-score", score );
+    }
+    this.gameData.highestScore = +score
+    menusConfig.highestScore.text = menusConfig.highestScore.text + this.gameData.highestScore.toFixed(5).substring(2)
   }
 }

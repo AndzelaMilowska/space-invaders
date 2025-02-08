@@ -22,7 +22,6 @@ export class GameplayActions extends UiActions{
     if (this.gameData.gameStatus === ApplicationStatus.GameLoose || this.gameData.gameStatus === ApplicationStatus.GameWin) {
       this.gameData.endgameTime++
     }
-
   }
 
 }

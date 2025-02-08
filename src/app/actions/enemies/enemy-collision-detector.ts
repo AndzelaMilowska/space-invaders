@@ -6,8 +6,9 @@ export class EnemyCollisionDetector extends CollisionDetector {
   static detectEnemyCollision(gameData: GameData, enemy: CharacterData) {
     let { playerShots} = gameData;
     this.detectCollision(playerShots, enemy, gameData.currentExplosions, () => {
-      gameData.score = enemy.type.scorePrice ? gameData.score + enemy.type.scorePrice : gameData.score;
       gameData.killsCount++;
+      if (!enemy.type.scorePrice) return
+      gameData.score = gameData.score + enemy.type.scorePrice * 0.00001
       
     });
   }

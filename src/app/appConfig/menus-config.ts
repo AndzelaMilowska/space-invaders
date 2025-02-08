@@ -51,15 +51,17 @@ export const menusConfig = {
         fontStyle: stylesConfig.primaryFontStyle,
         text: 'GAME OVER'
       },
+
       gameWin: {
         coordinates: {
           x: canvasConfig.x / 2,
-          y: canvasConfig.y / 2, 
+          y: canvasConfig.y / 3 + 50, 
         },
         fontConfig: `${stylesConfig.titleFontSize} ${stylesConfig.primaryFont}`,
         fontStyle: stylesConfig.primaryFontStyle,
         text: 'YOU WIN'
       },
+
       backToMenu: {
         coordinates: {
           x: canvasConfig.x / 2,
@@ -68,5 +70,25 @@ export const menusConfig = {
         fontConfig: `${stylesConfig.secondaryFontSize} ${stylesConfig.primaryFont}`,
         fontStyle: stylesConfig.primaryFontStyle,
         text:'PRESS ANY KEY' //`RETURN TO MAIN MENU`
+      },
+
+      highestScore: {
+        coordinates: {
+          x: canvasConfig.x / 2,
+          y: 30, 
+        },
+        fontConfig: `${stylesConfig.secondaryFontSize} ${stylesConfig.primaryFont}`,
+        fontStyle: stylesConfig.primaryFontStyle,
+        text:`HI-SCORE: `
+      },
+
+      newHighestScore: {
+        coordinates: {
+          x: canvasConfig.x / 2,
+          y: canvasConfig.y / 3 + 100, 
+        },
+        fontConfig: `${stylesConfig.primaryFontSize} ${stylesConfig.primaryFont}`,
+        fontStyle: stylesConfig.primaryFontStyle,
+        text:`NEW RECORD!`
       },
 }

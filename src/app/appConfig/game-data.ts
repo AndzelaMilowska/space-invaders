@@ -43,4 +43,6 @@ export class GameplayData extends Config implements GameData {
   currentExplosions: SpriteData[] = []
 
   endgameTime: number = 0
+
+  highestScore: number = 0
 }
