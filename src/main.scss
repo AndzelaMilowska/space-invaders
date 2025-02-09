@@ -1,9 +1,16 @@
 @import './styles/constants.scss';
 
+@font-face {
+    font-family: pixel;
+    src: url("https://dl.dropboxusercontent.com/s/hsdwvz761xqphhb/pixel.ttf");
+}
+
 body {
     background-color: $background-01;
+    display: flex;
+    justify-content: center;
 }
 
 canvas {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(48, 48, 48);
 }
