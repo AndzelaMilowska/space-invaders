@@ -25,23 +25,37 @@ export class EnemiesActions extends AttackActions {
     } else {
       AnimationSequencer.changeDisplayedImg(enemiesConfig.enemiesTable[0].type);
       AnimationSequencer.changeDisplayedImg(enemiesConfig.enemiesTable[1].type);
-      const rightmostEnemy = this.findRightmostEnemy();
-      const leftmostEnemy = this.findLeftmostEnemy();
+      
+      //if enemies are moving right find rightmost enemy, else enemies are moving left so find leftmost enemy  
+      let sideMostEnemy
+      let isCanvasTouched: boolean
+      if (enemiesConfig.frameStep.x > 0) {
+        sideMostEnemy = this.findRightmostEnemy()
+        isCanvasTouched = this.isCanvasTouched(sideMostEnemy, true)
+      } else {
+        sideMostEnemy = this.findLeftmostEnemy();
+        isCanvasTouched = this.isCanvasTouched(sideMostEnemy, false)
+      }
 
-      if (this.isCanvasTouched(leftmostEnemy, rightmostEnemy)) {
+      //if canvas is touched run onCanvasWallTouch, else continue enemies movement
+      if (isCanvasTouched) {
         this.onCanvasWallTouch();
       } else {
         enemiesTable.coordinates.x = enemiesTable.coordinates.x + enemiesConfig.frameStep.x;
       }
+
+
     }
   }
 
-  isCanvasTouched(leftmostEnemy: CharacterData, rightmostEnemy: CharacterData): boolean {
+  isCanvasTouched(sideMostEnemy: CharacterData, movingRight: boolean): boolean {
     const { enemiesConfig, canvasConfig } = this.config;
-    return (
-      rightmostEnemy.coordinates.x + enemiesConfig.frameStep.x + rightmostEnemy.type.size.x >= canvasConfig.x ||
-      leftmostEnemy.coordinates.x + enemiesConfig.frameStep.x <= 0
-    );
+    if (movingRight) {
+      return sideMostEnemy.coordinates.x + enemiesConfig.frameStep.x + sideMostEnemy.type.size.x >= canvasConfig.x
+    }
+    else {
+      return sideMostEnemy.coordinates.x + enemiesConfig.frameStep.x <= 0
+    }
   }
 
   onCanvasWallTouch() {
