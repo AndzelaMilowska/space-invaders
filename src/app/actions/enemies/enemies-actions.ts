@@ -57,33 +57,34 @@ export class EnemiesActions extends AttackActions {
     const { enemies } = this.gameData;
     let rowIndex = 0;
     let columnIndex = 0;
-    while (enemies[rowIndex] && enemies[rowIndex][columnIndex] && enemies[rowIndex][columnIndex].lives < 1) {
-      if (!rowIndex) {
-        return enemies[enemies.length - 1][enemies[enemies.length - 1].length - 1];
-      }
-      if (columnIndex >= enemies[rowIndex].length - 1) {
-        columnIndex = 0;
+
+    while (enemies[rowIndex][columnIndex].lives < 1) {
+      if (rowIndex < enemies.length - 1) {
         rowIndex++;
-      } else {
+      } else if (rowIndex === enemies.length - 1 && columnIndex < enemies[0].length - 1) {
+        rowIndex = 0;
         columnIndex++;
       }
+      else if (columnIndex === enemies[enemies.length - 1].length - 1) {
+        return enemies[enemies.length - 1][enemies[0].length - 1]
+      } 
     }
     return enemies[rowIndex][columnIndex];
   }
 
   findRightmostEnemy() {
     const { enemies } = this.gameData;
-    let rowIndex = enemies.length - 1;
-    let columnIndex = enemies[enemies.length - 1].length - 1;
-    while (enemies[rowIndex][columnIndex] && enemies[rowIndex][columnIndex].lives <= 0) {
-      if (!rowIndex) {
-        return enemies[enemies.length - 1][enemies[enemies.length - 1].length - 1];
-      }
-      if (columnIndex === 0) {
+    let rowIndex = enemies.length - 1; 
+    let columnIndex = enemies[enemies.length - 1].length - 1; 
+    while (enemies[rowIndex][columnIndex].lives <= 0) {
+      if (rowIndex >= 1) {
         rowIndex--;
-        columnIndex = enemies[rowIndex].length - 1;
-      } else {
+      } else if (rowIndex === 0 && columnIndex > 0) {
         columnIndex--;
+        rowIndex = enemies.length - 1;
+      }
+      else if (columnIndex === 0) {
+        return enemies[0][0]
       }
     }
 
@@ -100,7 +101,7 @@ export class EnemiesActions extends AttackActions {
   }
 
   isOnBottom(element: CharacterData) {
-    if (element.coordinates.y <= this.config.canvasConfig.y - this.config.canvasConfig.y/10) {
+    if (element.coordinates.y <= this.config.canvasConfig.y - this.config.canvasConfig.y / 10) {
       return;
     }
     this.gameData.gameStatus = ApplicationStatus.GameLoose;
