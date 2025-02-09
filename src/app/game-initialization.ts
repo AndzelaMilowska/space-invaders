@@ -22,13 +22,13 @@ export class GameInitialization {
   initializeGame(): void {
     this.config.enemiesConfig.offsetLeft = this.config.countEnemiesLeftOffset(); //count left offset start point
     this.gameData.enemies = this.initializeEnemies(this.config.enemiesConfig);
-    this.calculateTotalEnemiesNumber(this.config.enemiesConfig)
+    this.calculateTotalEnemiesNumber(this.config.enemiesConfig);
     this.player.detectMovement();
     this.player.playerAttack(this.gameData);
   }
 
   calculateTotalEnemiesNumber(enemiesConfig: EnemiesTable2D) {
-    enemiesConfig.enemiesCount = enemiesConfig.columnsCount * enemiesConfig.totalRowsCount
+    enemiesConfig.enemiesCount = enemiesConfig.columnsCount * enemiesConfig.totalRowsCount;
   }
 
   initializeEnemies(enemiesConfig: EnemiesTable2D) {
@@ -38,7 +38,7 @@ export class GameInitialization {
       const rowsStartIndex = enemiesArray.length;
       const rowsEndIndex = enemiesArray.length + enemiesTable[i].rowsCount;
       for (let row = rowsStartIndex; row < rowsEndIndex; row++) {
-        enemiesConfig.totalRowsCount++
+        enemiesConfig.totalRowsCount++;
         enemiesArray[row] = [];
         for (let column = 0; column < enemiesConfig.columnsCount; column++) {
           enemiesArray[row][column] = {
@@ -55,12 +55,12 @@ export class GameInitialization {
   }
 
   findHighestScore() {
-    let score = localStorage.getItem("hi-score")
+    let score = localStorage.getItem("hi-score");
     if (!score) {
-      score = "00000"
-      localStorage.setItem("hi-score", score );
+      score = "00000";
+      localStorage.setItem("hi-score", score);
     }
-    this.gameData.highestScore = +score
-    menusConfig.highestScore.text = menusConfig.highestScore.text + this.gameData.highestScore.toFixed(5).substring(2)
+    this.gameData.highestScore = +score;
+    menusConfig.highestScore.text = menusConfig.highestScore.text + this.gameData.highestScore.toFixed(5).substring(2);
   }
 }

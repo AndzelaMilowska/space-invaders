@@ -4,7 +4,6 @@ import { bulletsConfig_01 } from "./bullets-config-01";
 import { explosionConfig_01 } from "./explosion-config-01";
 
 export const playerConfig: CharacterConfig = {
-
   size: {
     x: 16 * 3,
     y: 8 * 3,
@@ -33,6 +32,6 @@ export const playerConfig: CharacterConfig = {
   frameSkip: 1000,
 
   deathAnimationConfig: explosionConfig_01,
-  
-  timeToRespawn: 200
+
+  timeToRespawn: 200,
 };

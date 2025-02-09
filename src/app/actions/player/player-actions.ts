@@ -1,13 +1,12 @@
 import { Config } from "../../appConfig/game-config";
-import { throttle } from "../../decorators/throttle";
 import { GameData } from "../../interfaces/game-data.interface";
 import { AttackActions } from "../attack-actions";
-export class PlayerActions extends AttackActions{
+export class PlayerActions extends AttackActions {
   isRightKeyPressed: boolean;
   isLeftKeyPressed: boolean;
 
   constructor() {
-    super()
+    super();
     this.isRightKeyPressed = false;
     this.isLeftKeyPressed = false;
   }
@@ -41,21 +40,20 @@ export class PlayerActions extends AttackActions{
     let playerData = gameData.player;
     let playerConfig = configObject.playerConfig;
     if (this.isRightKeyPressed) {
-      //what are those random numbers?
-      playerData.coordinates.x = Math.min(playerData.coordinates.x + playerData.type.frameStep.x, configObject.canvasConfig.x - playerConfig.size.x);
+      playerData.coordinates.x = Math.min(
+        playerData.coordinates.x + playerData.type.frameStep.x,
+        configObject.canvasConfig.x - playerConfig.size.x
+      );
     } else if (this.isLeftKeyPressed) {
       playerData.coordinates.x = Math.max(playerData.coordinates.x - playerData.type.frameStep.x, 0);
     }
   }
 
   playerAttack(gameData: GameData) {
-    document.addEventListener(
-      "keydown", (e: KeyboardEvent) => {
-        if (e.key === "x") {
-          this.spawnBullet(gameData.player, gameData.playerShots)
-        }
+    document.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "x") {
+        this.spawnBullet(gameData.player, gameData.playerShots);
       }
-    );
+    });
   }
-
 }

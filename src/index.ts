@@ -12,35 +12,42 @@ import { EnemiesActions } from "./app/actions/enemies/enemies-actions";
 import { GameplayActions } from "./app/actions/gameplayActions";
 import { UIRenderer } from "./app/renderers/ui-renderer";
 import { UIDrawer } from "./app/drawers/ui-drawer";
-import {AttacksRenderer} from './app/renderers/attacks-renderer'
+import { AttacksRenderer } from "./app/renderers/attacks-renderer";
 import { ExplosionRenderer } from "./app/renderers/explosion-renderer";
 
 const gameConfig = new Config();
 const gameData = new GameplayData();
 
 const playerActions = new PlayerActions();
-const enemiesActions = new EnemiesActions(gameData, gameConfig)
-const gameplayActions = new GameplayActions(gameConfig, gameData)
+const enemiesActions = new EnemiesActions(gameData, gameConfig);
+const gameplayActions = new GameplayActions(gameConfig, gameData);
 
 const gameInit = new GameInitialization(gameConfig, gameData, playerActions, enemiesActions);
 
-
-
 const drawer = new Drawer("myCanvas", gameConfig.canvasConfig);
 const enemiesDrawer = new EnemiesDrawer("myCanvas", gameConfig.canvasConfig);
-const attacksRenderer = new AttacksRenderer(drawer)
-const uiDrawer = new UIDrawer("myCanvas", gameConfig.canvasConfig)
+const attacksRenderer = new AttacksRenderer(drawer);
+const uiDrawer = new UIDrawer("myCanvas", gameConfig.canvasConfig);
 
 const playerRenderer = new PlayerRenderer(drawer, playerActions, gameConfig, gameData, attacksRenderer);
-const explosionsRenderer = new ExplosionRenderer(drawer)
-const enemiesRenderer = new EnemiesRenderer( gameConfig, gameData, enemiesDrawer, attacksRenderer);
-const uiRenderer = new UIRenderer(uiDrawer, gameData, gameConfig.uiConfig)
-const game = new Renderer("myCanvas", gameConfig, gameData, playerRenderer, gameInit, enemiesRenderer, gameplayActions, uiRenderer, explosionsRenderer);
+const explosionsRenderer = new ExplosionRenderer(drawer);
+const enemiesRenderer = new EnemiesRenderer(gameConfig, gameData, enemiesDrawer, attacksRenderer);
+const uiRenderer = new UIRenderer(uiDrawer, gameData, gameConfig.uiConfig);
+const game = new Renderer(
+  "myCanvas",
+  gameConfig,
+  gameData,
+  playerRenderer,
+  gameInit,
+  enemiesRenderer,
+  gameplayActions,
+  uiRenderer,
+  explosionsRenderer
+);
 
 game.renderApplication();
 
 /* 
     TODO list:
     - unit tests !!!!!
-    - add highest score 
 */

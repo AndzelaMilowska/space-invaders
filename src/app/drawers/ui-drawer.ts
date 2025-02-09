@@ -26,7 +26,7 @@ export class UIDrawer extends Drawer {
     }
   }
 
-  drawStartScreenTextElement(UIElement: UIElementInterface, message?:string) {
+  drawStartScreenTextElement(UIElement: UIElementInterface, message?: string) {
     const { text, coordinates, fontConfig, fontStyle } = UIElement;
     this.drawCenteredText(text, coordinates, fontConfig, fontStyle);
   }

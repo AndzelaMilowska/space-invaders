@@ -1,8 +1,7 @@
 import { constants } from "../constants/constants";
 import { canvasConfig } from "./canvas-config-data";
-import {stylesConfig} from './styles-config'
+import { stylesConfig } from "./styles-config";
 export const uiConfig = {
-
   scoreConfig: {
     coordinates: {
       x: 8,
@@ -21,9 +20,8 @@ export const uiConfig = {
     fontStyle: stylesConfig.primaryFontStyle,
     icon: constants.PLAYER_IMGS[0],
     iconSize: {
-        x: 16*2,
-        y: 8*2
-    }
+      x: 16 * 2,
+      y: 8 * 2,
+    },
   },
-
 };

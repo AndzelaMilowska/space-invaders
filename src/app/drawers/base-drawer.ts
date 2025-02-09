@@ -30,6 +30,6 @@ export class Drawer extends Canvas {
     this.canvasContext.font = fontConfig;
     let textWidth = this.canvasContext.measureText(textData).width;
     let centeredCoordinates = { x: coordinates.x - textWidth / 2, y: coordinates.y };
-    this.drawText(textData, centeredCoordinates, fontConfig, fontStyle)
+    this.drawText(textData, centeredCoordinates, fontConfig, fontStyle);
   }
 }

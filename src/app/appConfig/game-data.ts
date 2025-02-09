@@ -1,13 +1,11 @@
 import { Config } from "./game-config";
 import { GameData } from "../interfaces/game-data.interface";
 import { CharacterData } from "../interfaces/character-data.interface";
-import { Coordinates2D } from "../interfaces/coordinates-2D.interface";
-import {ApplicationStatus} from '../constants/application-status.enum'
+import { ApplicationStatus } from "../constants/application-status.enum";
 import { ElementData } from "../interfaces/element-data.interface";
 import { SpriteData } from "../interfaces/sprite-data.interface";
 
 export class GameplayData extends Config implements GameData {
-
   currentFrameIndex: number = 0;
 
   gameStatus = ApplicationStatus.StartScreen;
@@ -19,7 +17,7 @@ export class GameplayData extends Config implements GameData {
     },
     lives: this.playerConfig.lives,
     type: this.playerConfig,
-    timeToRespawn: 0
+    timeToRespawn: 0,
   };
 
   enemies: CharacterData[][] = [];
@@ -36,13 +34,13 @@ export class GameplayData extends Config implements GameData {
     skippedFrameCounter: 50,
     coordinates: {
       x: 0,
-      y: 0
-    }
-  }
+      y: 0,
+    },
+  };
 
-  currentExplosions: SpriteData[] = []
+  currentExplosions: SpriteData[] = [];
 
-  endgameTime: number = 0
+  endgameTime: number = 0;
 
-  highestScore: number = 0
+  highestScore: number = 0;
 }

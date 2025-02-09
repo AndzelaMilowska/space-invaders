@@ -1,4 +1,4 @@
 export interface Coordinates2D {
-    x: number, //width
-    y: number  //height
+  x: number; //width
+  y: number; //height
 }

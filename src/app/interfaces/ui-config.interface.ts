@@ -10,6 +10,6 @@ export interface UIElementInterface {
   fontConfig: string;
   fontStyle: string;
   icon?: string;
-  iconSize?: Coordinates2D
-  text?: string
+  iconSize?: Coordinates2D;
+  text?: string;
 }

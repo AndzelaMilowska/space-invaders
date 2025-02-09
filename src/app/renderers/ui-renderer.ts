@@ -36,7 +36,7 @@ export class UIRenderer extends UiActions {
 
     this.uiDrawer.drawStartScreenTextElement(menusConfig.backToMenu);
     if (gameStatus === ApplicationStatus.GameLoose) {
-      status = menusConfig.gameLoose; 
+      status = menusConfig.gameLoose;
       this.uiDrawer.drawSprites(
         this.endGameMenuSprites,
         [this.gameData.enemies[0][0].type, this.gameData.enemies[this.gameData.enemies.length - 1][0].type],
@@ -45,19 +45,19 @@ export class UIRenderer extends UiActions {
     } else if (gameStatus === ApplicationStatus.GameWin) {
       status = menusConfig.gameWin;
       if (this.gameData.score > this.gameData.highestScore) {
-        this.gameData.highestScore = this.gameData.score
-        localStorage.setItem("hi-score", `${this.gameData.score.toFixed(5)}` );
+        this.gameData.highestScore = this.gameData.score;
+        localStorage.setItem("hi-score", `${this.gameData.score.toFixed(5)}`);
       }
 
       if (this.gameData.score >= this.gameData.highestScore) {
-        this.uiDrawer.drawStartScreenTextElement(menusConfig.newHighestScore)
-        let scoreMessage = {...menusConfig.newHighestScore}
+        this.uiDrawer.drawStartScreenTextElement(menusConfig.newHighestScore);
+        let scoreMessage = { ...menusConfig.newHighestScore };
 
-        scoreMessage.text = `${this.gameData.score.toFixed(5).substring(2)}`
+        scoreMessage.text = `${this.gameData.score.toFixed(5).substring(2)}`;
 
-        scoreMessage.coordinates = {...menusConfig.newHighestScore.coordinates}
-        scoreMessage.coordinates.y = menusConfig.newHighestScore.coordinates.y +30
-        this.uiDrawer.drawStartScreenTextElement(scoreMessage)
+        scoreMessage.coordinates = { ...menusConfig.newHighestScore.coordinates };
+        scoreMessage.coordinates.y = menusConfig.newHighestScore.coordinates.y + 30;
+        this.uiDrawer.drawStartScreenTextElement(scoreMessage);
       }
     }
     this.uiDrawer.drawStartScreenTextElement(status);

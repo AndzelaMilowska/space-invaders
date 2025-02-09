@@ -3,17 +3,21 @@ import { ElementData } from "../interfaces/element-data.interface";
 import { SpriteData } from "../interfaces/sprite-data.interface";
 
 export class CollisionDetector {
-  //add colliderConfig to data in collidersArray (each collider should have "type" pointing to specific config (size, damage?))
-  static detectCollision(collidersArray: ElementData[], elementData: CharacterData,  explosionsArray: SpriteData[], callbackTasks?: Function) {
+  static detectCollision(
+    collidersArray: ElementData[],
+    elementData: CharacterData,
+    explosionsArray: SpriteData[],
+    callbackTasks?: Function
+  ) {
     const elementConfig = elementData.type;
     if (elementData.lives < 1) {
       return;
     }
     for (let i = 0; i < collidersArray.length; i++) {
-    if (collidersArray[i].coordinates.y <= 0 || collidersArray[i].coordinates.y >= 1000) {
-      collidersArray.splice(i, 1);
-      return
-    }
+      if (collidersArray[i].coordinates.y <= 0 || collidersArray[i].coordinates.y >= 1000) {
+        collidersArray.splice(i, 1);
+        return;
+      }
 
       const elementLeftLedge = elementData.coordinates.x;
       const elementRightLedge = elementLeftLedge + elementConfig.size.x;
@@ -27,7 +31,7 @@ export class CollisionDetector {
       ) {
         collidersArray.splice(i, 1);
         elementData.lives--;
-        this.explode(explosionsArray, elementData)
+        this.explode(explosionsArray, elementData);
         if (callbackTasks) {
           callbackTasks();
         }
@@ -43,7 +47,7 @@ export class CollisionDetector {
         y: explodedElement.coordinates.y,
       },
       type: explodedElement.type.deathAnimationConfig,
-      animationFrame: 0
+      animationFrame: 0,
     });
   }
 }
